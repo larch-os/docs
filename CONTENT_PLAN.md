@@ -30,7 +30,7 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 
 ## What's still an outline, and why
 
-- **`getting-started/downloading.mdx`**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch`) and a decision on whether to GPG-sign builds.
+- **`getting-started/downloading.mdx`**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds.
 - **`desktop-guide/noctalia.mdx`**: I don't have enough detail on noctalia's actual panel layout, launcher UX, or settings UI from anything documented so far. Needs someone who's actually used it to fill in, or a session spent exploring the live UI.
 
 Everything else has real, sourced content pulled from `larch/README.md`, `larch/docs/session-context.md`, `larch/docs/arch-niri-distro-context.md`, and direct inspection of the actual config files in `archiso/releng/airootfs/`.

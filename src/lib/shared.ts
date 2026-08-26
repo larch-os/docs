@@ -5,7 +5,7 @@ export const docsContentRoute = '/llms.mdx/docs';
 
 export const gitConfig = {
   user: 'larch-os',
-  repo: 'larch',
+  repo: 'larch-base',
   branch: 'main',
 };
 
