@@ -17,6 +17,10 @@ content/docs/
     noctalia.mdx                     OUTLINE
     shell-and-terminal.mdx           real content
     networking.mdx                   real content
+  using-larch/
+    keyboard-shortcuts.mdx           real content
+    power-management.mdx             real content (documents a real gap: swayidle unconfigured)
+    development-tools.mdx            OUTLINE - no dev tools in packages.x86_64 yet
   package-management.mdx             real content
   known-issues.mdx                   real content
   development/
@@ -32,8 +36,17 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 
 - **`getting-started/downloading.mdx`**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds.
 - **`desktop-guide/noctalia.mdx`**: I don't have enough detail on noctalia's actual panel layout, launcher UX, or settings UI from anything documented so far. Needs someone who's actually used it to fill in, or a session spent exploring the live UI.
+- **`using-larch/development-tools.mdx`**: nothing to document yet, see below.
 
-Everything else has real, sourced content pulled from `larch/README.md`, `larch/docs/session-context.md`, `larch/docs/arch-niri-distro-context.md`, and direct inspection of the actual config files in `archiso/releng/airootfs/`.
+Everything else has real, sourced content pulled from `larch-base/README.md`, `larch-base/docs/session-context.md`, `larch-base/docs/arch-niri-distro-context.md`, and direct inspection of the actual config files in `archiso/releng/airootfs/`.
+
+## Using Larch section
+
+`keyboard-shortcuts.mdx` is sourced directly from `~/.config/niri/config.d/binds.kdl` (the real machine's config, already ported to the ISO verbatim, see [[project-larch-overview]]-adjacent memory on the niri config diff), organized into the categories the bindings actually fall into: launching, window management, workspace management, monitor management, screenshots, media/hardware keys, session.
+
+`power-management.mdx` documents a real, previously-undocumented gap found while writing it: the live ISO deliberately disables suspend/hibernate/lid-switch via `/etc/systemd/logind.conf.d/do-not-suspend.conf` (correct, intentional for a live session), but `swayidle` is spawned at startup with zero config, no dimming, no lock-on-idle, nothing. The real machine's swayidle setup (dim → screen-off → suspend-then-hibernate) is documented on the page as reference for a future installed-system default, explicitly not yet ported or decided.
+
+`development-tools.mdx` is a pure outline. `packages.x86_64` only has `vim`/`nano`/`tmux` (generic archiso `releng` baseline tools), nothing that backs up the homepage's "tuned for development work" pitch yet. **The homepage copy and this page describe different realities right now** — worth resolving one direction or the other once dev tooling is actually decided.
 
 ## Fumadocs conventions (for whoever touches this next)
 
@@ -67,3 +80,5 @@ Known placeholders:
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
 4. Once the installer exists, `getting-started/live-session.mdx` and `development/roadmap.mdx` both need updates, they currently describe it as unbuilt.
 5. Decide on the homepage screenshot/wallpaper question above, and whether a `LICENSE` file should exist.
+6. Decide whether to give the live session (or the eventual installed system) a real swayidle config, currently it runs configured to do nothing. See `using-larch/power-management.mdx`.
+7. Pick actual dev tools to ship, then fill in `development-tools.mdx` and make sure it matches whatever the homepage claims.

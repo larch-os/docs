@@ -1,0 +1,116 @@
+---
+title: Keyboard shortcuts
+description: Every binding configured in niri, organized by what it does
+---
+
+`Mod` is the Super (Windows) key, niri's default, not remapped. Everything below is sourced directly from `~/.config/niri/config.d/binds.kdl`, not niri's own defaults, some of niri's stock bindings are intentionally overridden here (see [niri](/docs/desktop-guide/niri) for why).
+
+## Launching things
+
+| Shortcut | Action |
+| --- | --- |
+| `Mod+Return` | Open a terminal (kitty) |
+| `Mod+E` | Open the file manager (Dolphin) |
+| `Alt+Space` | Toggle the app launcher |
+| `Alt+W` or `Ctrl+Alt+Space` | Open the window switcher |
+| `Mod+V` | Toggle the clipboard history panel |
+| `F9` | Toggle the top bar |
+| `Mod+Shift+W` | Switch to a random wallpaper |
+| `Super+Alt+L` | Lock the screen |
+
+## Window management
+
+| Shortcut | Action |
+| --- | --- |
+| `Mod+C` | Close the focused window |
+| `Mod+Left` / `Mod+H` | Focus the column to the left |
+| `Mod+Right` / `Mod+L` | Focus the column to the right |
+| `Mod+Down` | Focus the window below in the column |
+| `Mod+Up` | Focus the window above in the column |
+| `Mod+Ctrl+Left` / `Mod+Ctrl+H` | Move the focused column left |
+| `Mod+Ctrl+Right` / `Mod+Ctrl+L` | Move the focused column right |
+| `Mod+Ctrl+Down` | Move the focused window down within its column |
+| `Mod+Ctrl+Up` | Move the focused window up within its column |
+| `Mod+Home` / `Mod+End` | Focus the first / last column |
+| `Mod+Ctrl+Home` / `Mod+Ctrl+End` | Move the column to the first / last position |
+| `Mod+BracketLeft` / `Mod+BracketRight` | Consume the window into the column to the side, or expel it if it's already in one |
+| `Mod+Comma` | Consume a window from the right into the bottom of the focused column |
+| `Mod+Period` | Expel the bottom window from the focused column |
+| `Mod+R` | Cycle preset column widths |
+| `Mod+Shift+R` | Cycle preset window heights |
+| `Mod+Ctrl+R` | Reset window height |
+| `Mod+Ctrl+F` | Expand the column to the available width |
+| `Mod+Shift+F` | Fullscreen the focused window |
+| `Mod+Ctrl+C` | Center the visible columns |
+| `Mod+Minus` / `Mod+Equal` | Shrink / grow the column width by 10% |
+| `Mod+Shift+Minus` / `Mod+Shift+Equal` | Shrink / grow the window height by 10% |
+| `Mod+Shift+V` | Toggle floating for the focused window |
+| `Mod+W` | Toggle tabbed display for the column |
+
+## Workspace management
+
+| Shortcut | Action |
+| --- | --- |
+| `Mod+J` | Focus the window below, or the workspace below if already at the bottom of the column |
+| `Mod+K` | Focus the window above, or the workspace above if already at the top of the column |
+| `Mod+Ctrl+J` | Move the window down, or to the workspace below |
+| `Mod+Ctrl+K` | Move the window up, or to the workspace above |
+| `Mod+Page_Down` / `Mod+U` | Focus the workspace below |
+| `Mod+Page_Up` / `Mod+I` | Focus the workspace above |
+| `Mod+Ctrl+Page_Down` / `Mod+Ctrl+U` | Move the focused column to the workspace below |
+| `Mod+Ctrl+Page_Up` / `Mod+Ctrl+I` | Move the focused column to the workspace above |
+| `Mod+Shift+Page_Down` / `Mod+Shift+U` | Move the whole workspace down |
+| `Mod+Shift+Page_Up` / `Mod+Shift+I` | Move the whole workspace up |
+| `Mod+1` through `Mod+9` | Focus workspace 1 through 9 |
+| `Mod+Ctrl+1` through `Mod+Ctrl+9` | Move the focused column to workspace 1 through 9 |
+| `Mod+Tab` | Switch to the previously focused workspace |
+| `Mod+G` | Toggle the workspace overview |
+| `Mod+WheelScrollUp` / `Mod+WheelScrollDown` | Scroll through workspaces |
+| `Mod+WheelScrollLeft` / `Mod+WheelScrollRight` | Focus the column left / right |
+
+## Monitor management
+
+Only matters with more than one display connected.
+
+| Shortcut | Action |
+| --- | --- |
+| `Mod+Shift+Left` / `H` | Focus the monitor to the left |
+| `Mod+Shift+Right` / `L` | Focus the monitor to the right |
+| `Mod+Shift+Down` / `J` | Focus the monitor below |
+| `Mod+Shift+Up` / `K` | Focus the monitor above |
+| `Mod+Shift+Ctrl+Left` / `H` | Move the focused column to the monitor on the left |
+| `Mod+Shift+Ctrl+Right` / `L` | Move the focused column to the monitor on the right |
+| `Mod+Shift+Ctrl+Down` / `J` | Move the focused column to the monitor below |
+| `Mod+Shift+Ctrl+Up` / `K` | Move the focused column to the monitor above |
+
+## Screenshots
+
+| Shortcut | Action |
+| --- | --- |
+| `Print` | Interactive screenshot (niri's built-in picker) |
+| `Ctrl+Print` | Screenshot the whole screen |
+| `Alt+Print` | Screenshot the focused window |
+| `Ctrl+Shift+Print` | Region screenshot into Satty for annotation, saved to `~/Pictures/Screenshots/` |
+
+The last one runs `~/.config/myscripts/screenshot.sh`: `grim` + `slurp` for the region select, piped straight into `satty` for markup, then saved as a timestamped PNG.
+
+## Media and hardware keys
+
+These work even when the screen is locked.
+
+| Shortcut | Action |
+| --- | --- |
+| `XF86AudioRaiseVolume` / `XF86AudioLowerVolume` | Volume up / down |
+| `XF86AudioMute` | Mute |
+| `XF86AudioMicMute` / `Mod+M` | Mute the microphone |
+| `XF86AudioPlay` | Play / pause media |
+| `XF86MonBrightnessUp` / `XF86MonBrightnessDown` | Brightness up / down |
+
+## Session
+
+| Shortcut | Action |
+| --- | --- |
+| `Mod+Escape` | Toggle the keyboard shortcut inhibitor (for remote-desktop apps that need to forward keys as-is) |
+| `Mod+Shift+E` | Quit niri (asks for confirmation) |
+| `Ctrl+Alt+Delete` | Quit niri (asks for confirmation) |
+| `Mod+Shift+P` | Power off monitors |
