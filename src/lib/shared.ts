@@ -1,11 +1,13 @@
-export const appName = 'My App';
+export const appName = 'Larch';
 export const docsRoute = '/docs';
 export const docsImageRoute = '/og/docs';
 export const docsContentRoute = '/llms.mdx/docs';
 
-// fill this with your actual GitHub info, for example:
 export const gitConfig = {
-  user: 'fuma-nama',
-  repo: 'fumadocs',
+  user: 'larch-os',
+  repo: 'larch',
   branch: 'main',
 };
+
+// TODO: replace with the real CDN URL once ISO hosting is live.
+export const downloadUrl = 'https://cdn.larch-os.dev/larch-latest.iso';
