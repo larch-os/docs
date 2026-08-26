@@ -1,0 +1,24 @@
+---
+title: Known issues
+description: Things that don't work yet, and why
+---
+
+## KDE apps (Dolphin, Okular) don't honor the dark theme
+
+niri + noctalia render dark correctly, and so do GTK apps and plain Qt6 apps configured through `qt6ct`. KDE Frameworks apps like Dolphin don't, they render with a white file-view background regardless of `kdeglobals` configuration.
+
+What's been ruled out:
+
+- `kdeglobals` with `ColorScheme=BreezeDark` alone: no effect.
+- Installing `plasma-integration` (trimmed to avoid pulling in `kwin`/`plasma-workspace` via `pacman --assume-installed`) plus `QT_QPA_PLATFORMTHEME=kde`: fixes the toolbar/header chrome, but not the file-view background.
+- Embedding the full `[Colors:*]` sections directly into `kdeglobals` (the documented fix for this exact symptom on other non-Plasma compositors): no effect.
+- Setting the color scheme in Dolphin's own per-app config (`dolphinrc`): no effect.
+- `KDE_FULL_SESSION`/`XDG_CURRENT_DESKTOP=KDE` environment variables: changes Dolphin's functional behavior (Baloo search integration turns on) but not the color.
+
+This is unresolved. The working theory is that full KColorScheme application needs something closer to a real Plasma session, `kded` (KDE's background daemon) crashes in this environment without the rest of the `plasma-workspace` stack behind it. Installing full `plasma-integration` with its complete dependency chain (`kwin`, `plasma-workspace`, `krunner`, `kscreenlocker`, ~66 packages total) would very likely fix it, but that's a real design tradeoff against running niri instead of KWin, and hasn't been decided yet.
+
+Okular isn't currently in `packages.x86_64` at all, so it isn't installed in the live session regardless of this issue.
+
+## VM testing needs a real GPU render node
+
+niri needs 3D-accelerated `virtio-gpu` (virgl), not plain `virtio-vga`/QXL. A default VM setup shows a black screen forever because niri can never bring up an output. See [Testing in a VM](/docs/development/testing-in-a-vm) for the exact libvirt config that works.

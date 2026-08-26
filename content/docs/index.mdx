@@ -1,13 +1,31 @@
 ---
-title: Hello World
-description: Your first document
+title: Introduction
+description: What Larch is and where the project stands right now
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+Larch is an Arch Linux based distribution built around [niri](https://github.com/YaLTeR/niri), a Wayland scrollable-tiling compositor, and [noctalia](https://github.com/noctalia-dev/noctalia), a Quickshell-based desktop shell. The tagline the project ships with: "Arch based linux distro for lazy yet power users."
 
-## What is Next?
+## What makes it different
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+- **Stock Arch repos only.** Larch doesn't run its own package repository. Everything comes from the official `core`/`extra` repos, with two AUR-only exceptions built into a local repo at build time (see [Building the ISO](/docs/development/building-the-iso)).
+- **niri + noctalia by default.** No KDE Plasma, no GNOME, no Plasma daemons running in the background. The desktop is scrollable-tiling first.
+- **A live desktop, not a rescue shell.** The ISO boots straight into a working niri + noctalia session with autologin, so you can try the desktop and test your hardware before installing anything.
+- **Config ported from a real machine.** The desktop configuration (niri, noctalia, shell, theming) is a direct port of the project's daily-driver setup, not a from-scratch default.
+
+## Project status
+
+Larch is early. Here's what exists and what doesn't:
+
+| Piece | Status |
+| --- | --- |
+| Live/bootable ISO | Works. Autologin into niri + noctalia. |
+| Installer | Not built yet. Design exists, no code. See [Roadmap](/docs/development/roadmap). |
+| Post-install provisioning (shell/shell-choice at install time) | Not built yet, depends on the installer. |
+
+Until the installer exists, Larch is a live-boot-only experience. This documentation reflects that: there's no "installation" section yet, because there's nothing to document.
+
+## Where to go next
+
+- New to Larch: start with [Getting started](/docs/getting-started).
+- Want to know what's in the desktop: read the [Desktop guide](/docs/desktop-guide).
+- Building Larch yourself or contributing: see [Development](/docs/development).

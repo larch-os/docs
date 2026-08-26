@@ -1,0 +1,11 @@
+{
+  "title": "Larch",
+  "pages": [
+    "index",
+    "getting-started",
+    "desktop-guide",
+    "package-management",
+    "known-issues",
+    "development"
+  ]
+}

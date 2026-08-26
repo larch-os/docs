@@ -1,0 +1,21 @@
+---
+title: Package management
+description: Stock Arch repos, pacman, and the two AUR exceptions
+---
+
+Larch runs on the standard Arch `core`/`extra` repositories. There's no custom Larch package repo, and no plan to add one. Everything you'd do on vanilla Arch (`pacman -S`, `pacman -Syu`, browsing the AUR yourself) works exactly the same here.
+
+<Callout type="info">
+  TODO: standard pacman usage doesn't need re-documenting, link to the [Arch Wiki's pacman page](https://wiki.archlinux.org/title/Pacman) instead of duplicating it. This page should focus on what's Larch-specific.
+</Callout>
+
+## The AUR exception
+
+Two packages are AUR-only and get built into a local pacman repo at ISO build time, rather than pulled from the AUR at runtime:
+
+- `sddm-silent-theme`
+- `redhat-fonts` (a dependency of the theme)
+
+`scripts/build-local-repo.sh` builds them into a local repo at a fixed path (`/tmp/larch-local-repo`), which the profile's `pacman.conf` points at. This means `mkarchiso` works without touching the AUR during the actual ISO build. See [Building the ISO](/docs/development/building-the-iso) for the mechanics.
+
+As a Larch user, this is invisible, both packages just show up installed. It only matters if you're building the ISO yourself.

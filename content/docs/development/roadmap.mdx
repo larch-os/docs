@@ -1,0 +1,32 @@
+---
+title: Roadmap
+description: What's built, what's designed, and what's still open
+---
+
+## Built
+
+- [x] Branding: ISO metadata, boot menus (syslinux/systemd-boot/grub), splash image, `os-release`/`issue`, hostname, motd.
+- [x] Package list (niri, noctalia, install-time tooling).
+- [x] Live-session config: niri/noctalia/theming replicated from a real working setup, `larch` live user with SDDM autologin into niri.
+
+## Not built
+
+- [ ] TUI installer.
+- [ ] Post-install provisioning (shell/desktop-shell choice at install time, copying the matching config into the installed system).
+
+## Installer design
+
+The installer isn't built. The plan:
+
+- Custom TUI, not Calamares (rejected as too much overhead to maintain). Likely Go with `bubbletea`, alternatives considered: Python `textual`/`questionary`, or `gum`/`whiptail`.
+- Runs as root via `pkexec`/`sudo` for disk operations.
+- Flow: welcome screen, pre-flight checks (internet, UEFI vs BIOS), disk selection and partitioning (Auto erase-disk vs Manual), system basics (hostname, timezone, locale, keyboard, user account), custom choice pages (shell: fish vs zsh, desktop shell: noctalia vs dank material shell), summary and confirm, automated install with live progress, done screen.
+- Launch: a tray icon (SNI over D-Bus, likely a small Go binary using `getlantern/systray`) or a terminal command, opening a fullscreen terminal via a niri window rule matching the installer's window title, autostarted through niri's `spawn-at-startup`.
+
+## Open decisions
+
+- Whether Manual partitioning ships in v1, or just Auto/erase-disk to start.
+- Whether noctalia exposes a config-based way to pin a custom tray icon, versus needing a full SNI passthrough binary, not yet confirmed.
+- The bar/launcher/notification-daemon stack for the default profile beyond noctalia itself.
+- Login/session flow specifics: greetd + niri session, versus a manual `niri-session` start.
+- Whether to chase full `plasma-integration` (and its `kwin`/`plasma-workspace` dependency chain) to fix KDE app theming, see [Known issues](/docs/known-issues).

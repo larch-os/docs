@@ -1,0 +1,28 @@
+---
+title: Shell and terminal
+description: zsh, oh-my-zsh, and kitty in the live session
+---
+
+## Terminal
+
+kitty is the default terminal, not konsole. This is a deliberate choice, not a stray dependency, if you see konsole anywhere it isn't coming from Larch.
+
+## Shell
+
+The `larch` user's default shell is zsh, running oh-my-zsh with the robbyrussell theme, plus three plugins:
+
+- `zsh-autosuggestions`
+- `zsh-syntax-highlighting`
+- `fzf-tab`
+
+Alongside that: `eza`, `fzf`, and `zoxide` are installed, and nerd-fonts ship so `eza --icons` renders correctly.
+
+## Where oh-my-zsh actually lives
+
+oh-my-zsh and its plugins are git submodules in the Larch repo (`archiso/releng/airootfs/home/larch/.oh-my-zsh` and `vendor/zsh-plugins/*`), not vendored files. `scripts/build-local-repo.sh` checks them out and copies the plugins into place at build time.
+
+This is scoped to the `larch` live user only, on purpose. An earlier approach considered installing oh-my-zsh system-wide via `/etc/skel` so every future user would get it automatically, and that was explicitly rejected: the plan is to wire it into the installer-created user by hand once the installer exists, not via skel magic.
+
+<Callout type="warn">
+  One gotcha already root-caused and fixed: `grml-zsh-config` used to be in the stock `releng` package list and silently overwrote the oh-my-zsh prompt through a `precmd_functions` hook. It's deliberately absent from `packages.x86_64` now. Don't re-add it.
+</Callout>

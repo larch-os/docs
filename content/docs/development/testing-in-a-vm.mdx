@@ -1,0 +1,72 @@
+---
+title: Testing in a VM
+description: The libvirt/QEMU config niri actually needs
+---
+
+niri needs a real GPU render node. A default virt-install VM (plain `virtio-vga`/QXL, no 3D) boots fine but shows a black screen forever, because niri can never bring up an output. Three things need to be true, and changing any of them requires a full power-off and start, not a guest reboot, QEMU only re-reads video/graphics/memory config when the process itself restarts.
+
+## Video device
+
+virtio-gpu with 3D acceleration (virgl), not plain `virtio-vga`. In virt-manager, that's the video model's 3D acceleration checkbox. If it doesn't actually take, check `/var/log/libvirt/qemu/<vm>.log` for the real `-device` line, libvirt sometimes silently keeps the non-GL device even with `accel3d='yes'` set. Force it directly:
+
+```xml
+<video>
+  <model type='none'/>
+</video>
+...
+<qemu:commandline xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <qemu:arg value='-device'/>
+  <qemu:arg value='virtio-vga-gl,id=video0,bus=pcie.0,addr=0x1'/>
+</qemu:commandline>
+```
+
+## Graphics
+
+SPICE with GL enabled and a local listener:
+
+```xml
+<graphics type='spice'>
+  <listen type='none'/>
+  <gl enable='yes' rendernode='/dev/dri/renderD128'/>
+</graphics>
+```
+
+## Memory backend
+
+virtio-gpu 3D needs shared memory:
+
+```xml
+<memoryBacking>
+  <source type='memfd'/>
+  <access mode='shared'/>
+</memoryBacking>
+```
+
+Give the VM at least 4GB RAM and 4 vCPUs, default templates hand out 1GB/2 vCPUs, too tight for a full desktop shell.
+
+## Restarting after a rebuild
+
+Full power cycle, not a guest-triggered reboot:
+
+```sh
+sudo virsh shutdown <vm-name>
+# wait for it to report "shut off"
+sudo virsh start <vm-name>
+```
+
+If the ISO filename changed (a new build date), repoint the VM's cdrom `<disk>` source at the new path first, don't rename the ISO to match the old path.
+
+## Scripted testing with qemu-guest-agent
+
+`qemu-guest-agent` is in `packages.x86_64` and auto-starts via udev the moment the virtio-serial channel appears, no setup needed. From the host:
+
+```sh
+virsh qemu-agent-command <vm-name> '{"execute":"guest-ping"}'
+```
+
+This gives you command execution inside the live session without needing SSH (which won't work anyway, the live account has no password by default). Useful for verifying a fix before doing a full rebuild-and-reboot cycle.
+
+## VM-only quirks, not bugs to chase
+
+- No Wi-Fi device by default, see [Networking](/docs/desktop-guide/networking).
+- The live account has no password across reboots, run `passwd` if you need SSH.
