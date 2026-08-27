@@ -66,12 +66,13 @@ export function Hero() {
 
         <div className="flex max-w-lg flex-col gap-2 text-base leading-relaxed text-fd-muted-foreground">
           <p>
-            Boots into a desktop that&apos;s already fast: dark theme,
-            keyboard-driven tiling, a shell with the shortcuts built in.
+            Boots into a desktop that&apos;s already set up to move fast:
+            dark theme, everything a keystroke away, so you&apos;re getting
+            to work, not setting one up.
           </p>
           <p>
-            Runs on real Arch underneath, so nothing about the distro stands
-            between you and whatever your workflow needs.
+            Built on real Arch for developers and engineers who want a fast,
+            no-nonsense system that stays out of the way.
           </p>
         </div>
 
