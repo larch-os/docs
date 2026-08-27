@@ -13,10 +13,13 @@ colors:
   canvas-dark: "#010120"
   surface-dark-soft: "#313641"
   on-dark: "#ffffff"
-  accent-orange: "#fc4c02"
-  accent-magenta: "#ef2cc1"
+  accent-blue: "#0060e0"
+  accent-sky: "#3b82f6"
   accent-periwinkle: "#bdbbff"
   accent-mint: "#c8f6f9"
+  # legacy aliases — kept for reference, mapped to blue scheme
+  accent-orange: "#0060e0"
+  accent-magenta: "#3b82f6"
 
 typography:
   display-xxl:
@@ -330,7 +333,7 @@ components:
 
 ## Overview
 
-Together AI is an AI cloud-infrastructure platform — model inference, GPU clusters, fine-tuning, all the plumbing that makes "the AI native cloud" deliverable to a developer team — and the brand's web surface signals exactly that posture: a near-black hero on top, a long ribbon of white technical content in the middle, and a single recurring piece of brand chrome — a three-color orange-magenta-periwinkle gradient ribbon — that does the entire job of "we are not just another grey enterprise SaaS." There is no other illustration system. The gradient is the brand.
+Together AI is an AI cloud-infrastructure platform — model inference, GPU clusters, fine-tuning, all the plumbing that makes "the AI native cloud" deliverable to a developer team — and the brand's web surface signals exactly that posture: a near-black hero on top, a long ribbon of white technical content in the middle, and a single recurring piece of brand chrome — a three-color blue gradient ribbon (`#0060e0` → `#3b82f6` → `#bdbbff`, logo-derived) — that does the entire job of "we are not just another grey enterprise SaaS." There is no other illustration system. The gradient is the brand. For Larch, the warm orange→magenta stops are remapped to logo blues to match `public/images/logo.png`.
 
 Type is the second decisive voice. Two faces carry every page: a custom geometric display sans (extracted as `The Future`) for headlines and body, set at weight 500 with tight, slightly-negative letter-spacing so 64-pixel hero type feels poured rather than typed; and an uppercase monospace eyebrow (`PP Neue Montreal Mono`) that labels every section, every button, and every cell header. Headlines are sentence-case; everything technical is uppercase mono. That contrast is the brand's tonal joke — the platform is serious enough to use a monospace label, modern enough to not put the headline in it.
 
@@ -338,7 +341,7 @@ Surfaces alternate aggressively: a `{colors.canvas-dark}` (`#010120`) band for h
 
 **Key Characteristics:**
 - A single black `{colors.primary}` CTA pill carries every conversion target across pricing, footer, sign-in. The mint `{colors.accent-mint}` and white pill variants are reserved for hero contexts only.
-- A three-color brand gradient (`{colors.accent-orange}` → `{colors.accent-magenta}` → `{colors.accent-periwinkle}`) is the entire decorative system — used as the hero ribbon graphic and never reduced to a swatch elsewhere.
+- A three-color brand gradient (`{colors.accent-blue}` `#0060e0` → `{colors.accent-sky}` `#3b82f6` → `{colors.accent-periwinkle}` `#bdbbff`, legacy `{colors.accent-orange}`/`{colors.accent-magenta}` aliases) is the entire decorative system — used as the hero ribbon graphic and never reduced to a swatch elsewhere.
 - All-caps mono eyebrows and button labels in `{typography.mono-caps-eyebrow}` / `{typography.mono-caps-button}` everywhere — section titles, model row headers, "ON-DEMAND" labels in pricing tables.
 - Lightly rounded card chrome at `{rounded.sm}` 4 px; one off `{rounded.xs}` 3.25 px appears inside pricing-tab pills as a tighter system; `{rounded.full}` only for the floating chat-launcher orb.
 - Dual surface mode — alternating `{colors.canvas-dark}` and `{colors.canvas}` bands; no in-between greys. The single soft surface `{colors.hairline}` exists only to mark table-header rows.
@@ -348,10 +351,10 @@ Surfaces alternate aggressively: a `{colors.canvas-dark}` (`#010120`) band for h
 
 ### Brand & Accent
 - **Ink Black** (`{colors.primary}` — `#000000`): The single primary CTA color. Black pill carries "Sign in", "Contact sales", "Get started now", every footer CTA.
-- **Brand Orange** (`{colors.accent-orange}` — `#fc4c02`): One leg of the three-color brand gradient. Appears in the hero ribbon graphic; never used as a UI fill on its own.
-- **Brand Magenta** (`{colors.accent-magenta}` — `#ef2cc1`): The second leg of the gradient.
+- **Brand Blue** (`{colors.accent-blue}` / legacy `{colors.accent-orange}` — `#0060e0`): Logo-derived primary blue (crop dominant `#0060e0` from `public/images/logo.png`). First leg of the three-color brand gradient. Appears in the hero ribbon graphic; never used as a UI fill on its own.
+- **Brand Sky** (`{colors.accent-sky}` / legacy `{colors.accent-magenta}` — `#3b82f6`): The second leg of the gradient (mid blue, bridges `#0060e0` → `#bdbbff`).
 - **Brand Periwinkle** (`{colors.accent-periwinkle}` — `#bdbbff`): The third leg of the gradient; also used as a soft fill for some stat tiles.
-- **Brand Mint** (`{colors.accent-mint}` — `#c8f6f9`): A pastel cyan that lives outside the gradient — used for hero secondary-CTA pills and `stats-card-tinted` tiles.
+- **Brand Mint** (`{colors.accent-mint}` — `#c8f6f9`): A pastel cyan that lives outside the gradient — used for hero secondary-CTA pills and `stats-card-tinted` tiles (kept for contrast against blue gradient).
 
 ### Surface
 - **Canvas** (`{colors.canvas}` — `#ffffff`): The default product / pricing / docs background.
@@ -371,7 +374,7 @@ Surfaces alternate aggressively: a `{colors.canvas-dark}` (`#010120`) band for h
 The brand does not maintain a separate error / success palette in its public surface; validation cues use the primary black or the brand gradient depending on context. No explicit error red, success green, or warning yellow is documented here — adopting framework defaults is appropriate.
 
 ### Brand Gradient
-The brand's signature decoration is a three-stop gradient drawn from `{colors.accent-orange}` → `{colors.accent-magenta}` → `{colors.accent-periwinkle}`, applied as the only piece of decorative chrome (the hero ribbon graphic). Treat the gradient as one unified object — do not crop it down to a single colour, do not reorder the stops, and do not add a fourth stop. Used at large scale; never miniaturised to icon size.
+The brand's signature decoration is a three-stop gradient drawn from `{colors.accent-blue}` (`#0060e0`) → `{colors.accent-sky}` (`#3b82f6`) → `{colors.accent-periwinkle}` (`#bdbbff`) (legacy aliases `{colors.accent-orange}`/`{colors.accent-magenta}` map to the same blues, derived from `public/images/logo.png` dominant `#0060e0`/`#0080e0`), applied as the only piece of decorative chrome (the hero ribbon graphic). Treat the gradient as one unified object — do not crop it down to a single colour, do not reorder the stops, and do not add a fourth stop. Used at large scale; never miniaturised to icon size.
 
 ## Typography
 

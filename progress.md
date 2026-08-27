@@ -44,6 +44,26 @@ Running log of completed work, decisions, and next steps. Update after each sign
   - Three stages `index.mdx:14` (live ISO → installer TUI Go+bubbletea design `roadmap.mdx:18` → docs evergreen), live-boot-only until installer exists.
   - Docs-work significance: real content sourced from live config, target-state docs intentional per `CONTENT_PLAN.md:58-62` IOUs.
 
+## 2026-08-27 — Freeze homepage anime.js plan
+
+- Frozen `plans/2026-08-27-larch-homepage-fancy-animejs.md` — Larch OS (not docs) fancy homepage: 10 bands (nav → hero 50/50 + ribbon + niri strip → screenshot clipPath → pitch → stack 6 cards → keys interactive → variants 3-up → status timeline pulsing → install CTA → footer stencil `LARCH`), using DESIGN.md tokens strictly (`canvas-dark #010120`, gradient `orange→magenta→periwinkle` only at hero scale, mono eyebrows, `sm 4px`) + Hypr.land tiling proof + Together AI dual-surface discipline. Anime.js via `createScope`/`stagger`/`timeline` + IntersectionObserver 0.25 once + `prefers-reduced-motion` guard. Build steps: `animejs` install, hooks, `@theme` + `Inter`/`JetBrains_Mono` font swap, 7 new components + refactors.
+
+## 2026-08-27 — Fix hero clutter + blue palette from logo (DESIGN.md)
+
+- Hero eyebrow was cluttered `Larch — Arch for lazy yet power users · niri` — simplified to `Niri · scrollable tiling` `hero.tsx:129` (`rounded-full`, `tracking 0.12em`, dot `#0060e0`), removed redundant tagline already in headline. Stripe and `power` gradient remapped from warm `orange→magenta` to logo blues `blue #0060e0 → sky #3b82f6 → periwinkle #bdbbff` (`global.css:5` `@theme`, `hero.tsx:154` `from-[#0060e0]`, `hero-ribbon.tsx:10` stops). Analyzed `public/images/logo.png` crop dominant `#0060e0` (0,96,224) 40125 px, #0080e0 34625 px, avg #154287.
+- Updated `DESIGN.md:6` colors to logo blues (`accent-blue #0060e0`, `accent-sky #3b82f6`, `periwinkle #bdbbff`, legacy aliases `accent-orange`→`#0060e0` etc.) + `DESIGN.md:352` Brand Blue/Sky + `DESIGN.md:373` gradient `blue→sky→periwinkle` + `DESIGN.md:336` overview remapped. Updated `CLAUDE.md:118` to note Larch blue remapping.
+- Fixed palette drift in components: `keys.tsx:87` `#ef2cc1`→`#3b82f6`, `keys.tsx:110` `#fc4c02`→`#0060e0`, `status.tsx:123` `#fc4c02`→`#0060e0`, `variants.tsx:80-86` dots to `0060e0/3b82f6/bdbbff` progression.
+- Verified: eyebrow now `NIRI · SCROLLABLE TILING` clean, gradient `linear-gradient(to right, rgb(0,96,224) → rgb(59,130,246))` in screenshot `/tmp/larch-blue.png:315K`, `Viewport 1280x900` hero visible, `bun run build` ✓.
+
+## 2026-08-27 — Execute fancy homepage (anime.js)
+
+- Installed `animejs@4.5.0` (`bun add animejs`), tokens mapped in `src/app/global.css:3` (`@theme` primary/canvas-dark/accent-*/radius/spacing) + `src/app/layout.tsx:3` `Inter`/`JetBrains_Mono` vars (replaced `Space_Grotesk`/`Instrument_Serif`), `gradient-brand` fixed `DESIGN.md:373`.
+- Created `src/hooks/use-anime.ts:1` + `use-intersection.ts:1` (reduced-motion guard, scope cleanup).
+- Built `src/components/home/hero-ribbon.tsx:1` SVG ribbon 3× blob morph + drift (9s inOutSine loop, hairline outline) + `niri-strip.tsx:1` infinite horizontal tile track (12 tiles doubled, `translateX -50%` 22s linear, vignette `canvas-dark`), wired into `hero.tsx:1` (`hero-band-dark` `canvas-dark #010120` `section 80px` `3xl 32px`, eyebrow `mono-caps-eyebrow 11/0.55`, headline `display-xxl 64/-1.92` stagger 70ms, stripe `scaleX`, CTA stagger 80ms `mono-caps-button` black/mint/ghost `sm 4px`, badge `surface-dark-soft`/`white`).
+- Rebuilt `screenshot.tsx:1` (`code-editor-mockup` chrome `canvas-dark` `mono-caption`, `clipPath` + scale reveal 720ms, `hairline` card `sm 4px`), `pitch.tsx:1` dark `research-band-dark` (eyebrow/headline/stagger 90ms paras, stripe, `Lazy/Power` tinted cards), `stack.tsx:1` white 3-up→1-up `research-card`/`stats-card-tinted` 6 distro cards `stagger 74ms` + tilt hover, `keys.tsx:1` dark interactive ( `toggle-pill-group` category pills, `DemoStage` strip preview with `consume→`/`Active`, auto-cycle 1300ms, row `bg-[#c8f6f9]/55` highlight, table `mono-caps-eyebrow` header, Link fix), `variants.tsx:1` white 3-up (featured `ink` dark `ex-pricing-tier-featured` + 2 ghost `hairline` cards), `status.tsx:1` dark timeline (hairline `scaleX` line, pulsing `active` dot `scale 1.14` 1.1s loop, stagger 90ms), `install-cta.tsx:1` white hairline cta (terminal `zsh — kitty` mock `#010120` `mono-caption`), `footer.tsx:1` (`footer` 4-col `mono-caps-eyebrow` + `body-md` + `footer-wordmark-banner` stencil) + `wordmark-banner.tsx:1` (`display-xxl` `hairline` tint `LARCH` stagger 54ms).
+- Updated `src/app/(home)/page.tsx:1` to `Hero→Screenshot→Pitch→Stack→Keys→Variants→Status→InstallCta→Footer` (10 bands, Larch OS distro-first, docs tertiary).
+- Verified: `bun run build` ✓ (10 pages, 1807ms, 57 static), `bun run types:check` ✓, `bun run lint` ✓ (fixed `a→Link` + any cast).
+
 ---
 
 ## Log

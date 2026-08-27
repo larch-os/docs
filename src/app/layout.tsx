@@ -1,33 +1,39 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import './global.css';
-import { Inter, Space_Grotesk, Instrument_Serif } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-body',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+  weight: ['400', '500'],
   variable: '--font-display',
+  display: 'swap',
 });
 
-const instrumentSerif = Instrument_Serif({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: '400',
-  style: 'italic',
-  variable: '--font-lazy',
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
 });
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} ${inter.className}`}
+      className={`dark ${inter.variable} ${jetbrainsMono.variable} ${inter.className}`}
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider
+          theme={{
+            enableSystem: false,
+            defaultTheme: 'dark',
+            forcedTheme: 'dark',
+            enableColorScheme: false,
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
