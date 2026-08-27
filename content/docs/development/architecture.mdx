@@ -35,6 +35,6 @@ The live ISO's noctalia config is meant to be the same one copied into a freshly
 
 ## Key decisions worth knowing
 
-- **oh-my-zsh is a git submodule**, not vendored files (see [Shell and terminal](/docs/desktop-guide/shell-and-terminal)). Clone with `--recurse-submodules` or the build fails loudly rather than silently shipping an empty `.oh-my-zsh` directory.
+- **oh-my-zsh is a git submodule**, not vendored files (see [Shell and terminal](/docs/software-guide/shell-and-terminal)). Clone with `--recurse-submodules` or the build fails loudly rather than silently shipping an empty `.oh-my-zsh` directory.
 - **No `/etc/skel` for oh-my-zsh.** Deliberately scoped to the `larch` live user. The installer will wire it into the installer-created user by hand later, not through skel.
 - **Never rename a built ISO file.** If a VM needs to point at a new build, repoint the VM's disk XML at the real dated filename (`out/larch-<date>-x86_64.iso`) instead.
