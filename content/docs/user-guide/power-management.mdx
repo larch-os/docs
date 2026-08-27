@@ -1,0 +1,30 @@
+---
+title: Power management
+description: Sleep, hibernate, and idle behavior
+---
+
+Idle behavior runs through swayidle, paired with a couple of systemd sleep settings.
+
+**`~/.config/swayidle/config`:**
+
+```
+# 5 min -> dim brightness and lock
+timeout 300 'brightnessctl -s set 1%; qs -c noctalia-shell ipc call lockScreen lock' resume 'brightnessctl -r'
+
+# 10 min -> turn off displays
+timeout 600 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
+
+# 30 min -> suspend then hibernate
+timeout 1800 'systemctl suspend-then-hibernate'
+
+# always lock before sleeping
+before-sleep 'qs -c noctalia-shell ipc call lockScreen lock'
+lock 'qs -c noctalia-shell ipc call lockScreen lock'
+```
+
+Two more settings outside the swayidle config itself:
+
+- `/etc/systemd/sleep.conf`: `AllowSuspendThenHibernate=yes`, `HibernateDelaySec=2h`
+- `/etc/systemd/logind.conf`: `HandlePowerKey=hibernate`, `HandlePowerKeyLongPress=suspend-then-hibernate`
+
+Suspend-then-hibernate needs a swap file or partition sized for hibernation.
