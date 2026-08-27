@@ -3,26 +3,29 @@ title: Introduction
 description: What Larch is and where the project stands right now
 ---
 
-Larch is an Arch Linux based distribution built around [niri](https://github.com/YaLTeR/niri), a Wayland scrollable-tiling compositor, and [noctalia](https://github.com/noctalia-dev/noctalia), a Quickshell-based desktop shell. The tagline the project ships with: "Arch based linux distro for lazy yet power users."
+Larch is built for developers and engineers who take their setup seriously. The desktop runs on niri, a keyboard-driven, scrollable-tiling window manager, the kind of setup power users reach for because it gets out of your way once it's configured. That "once it's configured" part is usually the catch: tiling window managers normally leave you writing your own keybindings, layout rules, and window behavior from scratch, often over a weekend, before any of that speed pays off.
 
-## What makes it different
+Larch skips the weekend. niri ships with real keybindings for moving between windows and workspaces already wired in, sane layout defaults, a dark theme, nothing left for you to build before it's usable.
 
-- **Stock Arch repos only.** Larch doesn't run its own package repository. Everything comes from the official `core`/`extra` repos, with two AUR-only exceptions built into a local repo at build time (see [Building the ISO](/docs/development/building-the-iso)).
-- **niri + noctalia by default.** No KDE Plasma, no GNOME, no Plasma daemons running in the background. The desktop is scrollable-tiling first.
-- **A live desktop, not a rescue shell.** The ISO boots straight into a working niri + noctalia session with autologin, so you can try the desktop and test your hardware before installing anything.
-- **Config ported from a real machine.** The desktop configuration (niri, noctalia, shell, theming) is a direct port of the project's daily-driver setup, not a from-scratch default.
+The project's own tagline: "Arch based linux distro for lazy yet power users." Lazy, because you're not hand-rolling a tiling window manager config from scratch. Power user, because the software stack isn't generic: Larch ships the tools best suited for the jobs developers reach for every day, not just whatever the obvious default happens to be.
 
 ## Project status
 
-Larch is early. Here's what exists and what doesn't:
+Larch is being built in three stages:
+
+1. **A finished live ISO.** Every tool and setting the distro promises actually present, so booting it is the real experience, not a preview of one. This is the current focus.
+2. **An installer.** Turns that live session into an installed system. Design exists, no code yet, see [Roadmap](/docs/development/roadmap).
+3. **Docs kept current.** Not a stage with an end date, an ongoing commitment as the first two stages change.
+
+Where things stand today:
 
 | Piece | Status |
 | --- | --- |
-| Live/bootable ISO | Works. Autologin into niri + noctalia. |
-| Installer | Not built yet. Design exists, no code. See [Roadmap](/docs/development/roadmap). |
-| Post-install provisioning (shell/shell-choice at install time) | Not built yet, depends on the installer. |
+| Live/bootable ISO | Boots, autologin into niri + noctalia. Tooling and setup still being filled in. |
+| Installer | Not built yet. |
+| Post-install provisioning (shell/desktop-shell choice at install time) | Not built yet, depends on the installer. |
 
-Until the installer exists, Larch is a live-boot-only experience. This documentation reflects that: there's no "installation" section yet, because there's nothing to document.
+Until the installer exists, Larch is a live-boot-only experience. There's no "installation" section in these docs yet, because there's nothing to document.
 
 ## Where to go next
 
