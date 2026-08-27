@@ -1,0 +1,29 @@
+---
+title: Getting started
+description: Download Larch, boot it in a VM, and try the live desktop
+---
+
+## Download
+
+<DownloadButton />
+
+<Callout type="warn">
+  No public release process exists yet, ISOs are built locally right now. Once builds are published somewhere (GitHub Releases is the likely candidate), this section needs a real checksum/verification step and minimum specs (RAM, GPU requirements) added.
+</Callout>
+
+## Boot it in a VM
+
+The fastest way to try Larch right now is in a VM. Boot the ISO and you're straight into a working desktop, no rescue TTY to click through first: SDDM autologs into a `larch` user, niri (Wayland compositor) with noctalia as the shell, dark theme, kitty as the terminal, Firefox as the browser. Display resolution auto-detects rather than assuming real hardware, so it works the same in a VM's virtual output as on a laptop screen.
+
+One requirement: niri needs a real GPU render node. A default VM setup (plain `virtio-vga`, no 3D) shows a black screen forever. See [Testing in a VM](/docs/development/testing-in-a-vm) for the exact libvirt/QEMU config that works.
+
+Two things worth knowing about the live session itself, VM or real hardware:
+
+- The `larch` user has no password across reboots. Run `passwd` first if you need SSH into it.
+- The session is stateless. Nothing you change persists past a reboot, this isn't an installed system yet.
+
+## Installing Larch
+
+<Callout type="warn">
+  The installer doesn't exist yet, see [Roadmap](/docs/development/roadmap). Once it's built, this section walks through the actual install flow.
+</Callout>
