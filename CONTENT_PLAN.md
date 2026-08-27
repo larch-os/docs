@@ -33,7 +33,7 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 ## What's still an outline, and why
 
 - **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page (booting in a VM, the installer placeholder) is real content.
-- **`desktop-guide/noctalia.mdx`**: I don't have enough detail on noctalia's actual panel layout, launcher UX, or settings UI from anything documented so far. Needs someone who's actually used it to fill in, or a session spent exploring the live UI.
+- **`desktop-guide/noctalia.mdx`**: needs the same lean treatment niri got (GitHub link + their own official demo video, nothing else). Blocked on the video specifically: noctalia's repo has no demo video or screenshot anywhere (checked the README and searched beyond it), only third-party YouTube content, which isn't the same thing as an official upstream demo. Waiting on a real URL rather than substituting one.
 - **`using-larch/development-tools.mdx`**: nothing to document yet, see below.
 
 Everything else has real, sourced content pulled from `larch-base/README.md`, `larch-base/docs/session-context.md`, `larch-base/docs/arch-niri-distro-context.md`, and direct inspection of the actual config files in `archiso/releng/airootfs/`.
@@ -75,7 +75,7 @@ Known placeholders:
 
 ## Next steps
 
-1. Fill in `noctalia.mdx` once there's real detail to write.
+1. Fill in `noctalia.mdx` once there's a real demo video URL for it (see above, blocked on that specifically now, not general detail).
 2. Decide on a release process, then fill in `getting-started.mdx`'s Download section and swap `downloadUrl` in `src/lib/shared.ts` for the real one (used by both the homepage and `<DownloadButton />`).
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
 4. Once the installer exists, `getting-started.mdx`'s "Installing Larch" section and `development/roadmap.mdx` both need updates, they currently describe it as unbuilt.
