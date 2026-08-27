@@ -18,7 +18,7 @@ export function Hero() {
         width={900}
         height={900}
         aria-hidden
-        className="pointer-events-none absolute -right-32 top-1/2 -z-10 hidden size-[26rem] -translate-y-1/2 opacity-[0.07] sm:block lg:size-[34rem]"
+        className="pointer-events-none absolute -right-40 top-1/2 -z-10 hidden size-[24rem] -translate-y-1/2 opacity-[0.04] sm:block lg:size-[30rem]"
       />
 
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-20 sm:py-28">
@@ -39,12 +39,12 @@ export function Hero() {
           </span>
         </div>
 
-        <h1 className="flex flex-col gap-1">
-          <span className="text-base text-fd-muted-foreground sm:text-xl">
-            Arch based linux distro
+        <h1 className="flex flex-col gap-2">
+          <span className="text-sm font-medium tracking-[0.2em] text-fd-muted-foreground/70 uppercase sm:text-base">
+            Distro
           </span>
           <span className="flex flex-wrap items-baseline gap-x-3 sm:gap-x-4">
-            <span className="text-xl text-fd-muted-foreground sm:text-3xl md:text-4xl">
+            <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
               for
             </span>
             <span className="font-[family-name:var(--font-lazy)] text-6xl italic text-fd-foreground sm:text-8xl md:text-9xl">
@@ -52,13 +52,13 @@ export function Hero() {
             </span>
           </span>
           <span className="flex flex-wrap items-baseline gap-x-3 sm:gap-x-4">
-            <span className="text-xl text-fd-muted-foreground sm:text-3xl md:text-4xl">
+            <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
               yet
             </span>
-            <span className="font-[family-name:var(--font-power)] text-4xl font-extrabold uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-sky-400 to-blue-600 sm:text-6xl md:text-8xl">
+            <span className="font-[family-name:var(--font-display)] text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500 sm:text-7xl md:text-8xl">
               power
             </span>
-            <span className="text-xl text-fd-muted-foreground sm:text-3xl md:text-4xl">
+            <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
               users.
             </span>
           </span>
