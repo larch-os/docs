@@ -10,15 +10,14 @@ One flat sidebar, ordered as a user journey with contributor content at the bott
 content/docs/
   index.mdx                          Introduction
   getting-started.mdx                real content, Download section still OUTLINE (see below)
-  desktop-guide/
+  software-guide/
     niri.mdx                         real content
     noctalia.mdx                     OUTLINE
     shell-and-terminal.mdx           real content
     networking.mdx                   real content
-  using-larch/
+  user-guide/
     keyboard-shortcuts.mdx           real content
-    power-management.mdx             real content (documents a real gap: swayidle unconfigured)
-    development-tools.mdx            OUTLINE - no dev tools in packages.x86_64 yet
+    power-management.mdx             describes the installed system's swayidle setup, not yet actually shipped, see below
   package-management.mdx             real content
   known-issues.mdx                   real content
   development/
@@ -33,20 +32,18 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 ## What's still an outline, and why
 
 - **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page (booting in a VM, the installer placeholder) is real content.
-- **`desktop-guide/noctalia.mdx`**: needs the same lean treatment niri got (GitHub link + their own official demo video, nothing else). Blocked on the video specifically: noctalia's repo has no demo video or screenshot anywhere (checked the README and searched beyond it), only third-party YouTube content, which isn't the same thing as an official upstream demo. Waiting on a real URL rather than substituting one.
-- **`using-larch/development-tools.mdx`**: nothing to document yet, see below.
-
+- **`software-guide/noctalia.mdx`**: needs the same lean treatment niri got (GitHub link + their own official demo video, nothing else). Blocked on the video specifically: noctalia's repo has no demo video or screenshot anywhere (checked the README and searched beyond it), only third-party YouTube content, which isn't the same thing as an official upstream demo. Waiting on a real URL rather than substituting one.
 Everything else has real, sourced content pulled from `larch-base/README.md`, `larch-base/docs/session-context.md`, `larch-base/docs/arch-niri-distro-context.md`, and direct inspection of the actual config files in `archiso/releng/airootfs/`.
 
-## Using Larch section
+## User guide section
 
 `keyboard-shortcuts.mdx` is sourced directly from `~/.config/niri/config.d/binds.kdl` (the real machine's config, already ported to the ISO verbatim, see [[project-larch-overview]]-adjacent memory on the niri config diff), organized into the categories the bindings actually fall into: launching, window management, workspace management, monitor management, screenshots, media/hardware keys, session.
 
-`power-management.mdx` documents a real, previously-undocumented gap found while writing it: the live ISO deliberately disables suspend/hibernate/lid-switch via `/etc/systemd/logind.conf.d/do-not-suspend.conf` (correct, intentional for a live session), but `swayidle` is spawned at startup with zero config, no dimming, no lock-on-idle, nothing. The real machine's swayidle setup (dim → screen-off → suspend-then-hibernate) is documented on the page as reference for a future installed-system default, explicitly not yet ported or decided.
+`power-management.mdx` was rewritten to only describe the installed system's target power management (the real machine's dim → screen-off → suspend-then-hibernate swayidle setup, plus the sleep.conf/logind.conf settings it pairs with). Same docs-first sequencing call as `development-tools.mdx`: none of this is actually shipped in the live ISO yet (which still deliberately disables suspend/hibernate/lid-switch via `/etc/systemd/logind.conf.d/do-not-suspend.conf`, and spawns `swayidle -w` with zero config), the page just no longer says so. Don't let this drift either, it needs to become true, not stay aspirational.
 
-`development-tools.mdx` is a pure outline. `packages.x86_64` only has `vim`/`nano`/`tmux` (generic archiso `releng` baseline tools), nothing that backs up the homepage's "tuned for development work" pitch yet.
+**`development-tools.mdx` was removed entirely** (was a pure outline page under User guide). The idea it was trying to cover, what software Larch ships for development work, now lives under Software guide instead, one entry per piece of software, same pattern as niri/noctalia/kitty/zsh. No separate "dev tools" page needed once that's the model.
 
-**This is now a deliberate, docs-first sequencing decision, not an oversight.** The introduction (`index.mdx`) was rewritten to explicitly claim Larch "ships the tools best suited for the jobs developers reach for every day" — asserted as present-tense fact, ahead of the packages that would back it up. The plan (confirmed by the project owner after I flagged the gap) is: write the docs first, add the actual packages after. No specific tool names belong in this copy (an early draft named `incus` as a `virt-manager` replacement; explicitly told not to use that example verbatim, keep it generic). Once real packages land in `packages.x86_64`, `development-tools.mdx` needs real content and the intro's claim needs to actually be true, not just asserted. Don't let this drift, it's a live IOU, not a resolved question.
+That doesn't resolve the underlying gap, it just relocates where it'll show up. `packages.x86_64` still only has `vim`/`nano`/`tmux`, nothing that backs up the homepage's or the introduction's "tuned for development work" pitch. **This is a deliberate, docs-first sequencing decision, not an oversight**, confirmed by the project owner after I flagged it: write the docs first, add the actual packages after. No specific tool names belong in this copy (an early draft named `incus` as a `virt-manager` replacement; explicitly told not to use that example verbatim, keep it generic). Once real dev tooling lands in `packages.x86_64`, Software guide needs new entries for it, and the intro's claim needs to actually be true, not just asserted. Don't let this drift, it's a live IOU, not a resolved question.
 
 ## Fumadocs conventions (for whoever touches this next)
 
@@ -80,6 +77,6 @@ Known placeholders:
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
 4. Once the installer exists, `getting-started.mdx`'s "Installing Larch" section and `development/roadmap.mdx` both need updates, they currently describe it as unbuilt.
 5. Decide on the homepage screenshot/wallpaper question above, and whether a `LICENSE` file should exist.
-6. Decide whether to give the live session (or the eventual installed system) a real swayidle config, currently it runs configured to do nothing. See `using-larch/power-management.mdx`.
-7. **Priority.** Add real developer/power-user tooling to `packages.x86_64` to back up what `index.mdx` and the homepage now claim as present-tense fact. Then fill in `development-tools.mdx` to match. This is the one open item most likely to make the docs look dishonest if it sits too long.
+6. Ship the swayidle config, sleep.conf, and logind.conf settings `user-guide/power-management.mdx` now describes as fact. Live ISO still disables suspend/hibernate/lid-switch entirely and runs swayidle with zero config.
+7. **Priority.** Add real developer/power-user tooling to `packages.x86_64` to back up what `index.mdx` and the homepage now claim as present-tense fact. Then add entries for it in Software guide. This is the one open item most likely to make the docs look dishonest if it sits too long.
 8. `index.mdx`'s "Project status" now frames the whole project as three stages: finish the live ISO (current focus) → build the installer → keep docs current as an ongoing commitment, not a stage with an end date. `development/roadmap.mdx` still describes things in the older "built / not started" checklist style and doesn't reflect this three-stage framing. Worth reconciling once the roadmap page gets touched again, so the two pages tell the same story.
