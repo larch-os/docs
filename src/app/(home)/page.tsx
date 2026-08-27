@@ -1,6 +1,7 @@
 import { Hero } from '@/components/home/hero';
 import { Screenshot } from '@/components/home/screenshot';
-import { Features } from '@/components/home/features';
+import { Pitch } from '@/components/home/pitch';
+import { Status } from '@/components/home/status';
 import { Footer } from '@/components/home/footer';
 
 export default function HomePage() {
@@ -8,7 +9,8 @@ export default function HomePage() {
     <main className="flex flex-1 flex-col">
       <Hero />
       <Screenshot />
-      <Features />
+      <Pitch />
+      <Status />
       <Footer />
     </main>
   );
