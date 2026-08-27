@@ -3,23 +3,10 @@ title: niri
 description: The window manager Larch runs on
 ---
 
-niri is a scrollable-tiling Wayland compositor. Instead of stacking windows or splitting them into fixed grids, it lays them out on an infinite horizontal strip you scroll through.
+[niri](https://github.com/niri-wm/niri) is a scrollable-tiling Wayland compositor. Instead of stacking windows or splitting them into fixed grids, it lays them out on an infinite horizontal strip you scroll through.
 
-## Keybindings
-
-Larch ships niri's default keybindings unmodified, there's no custom bindings file. Press <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>/</kbd> to bring up niri's built-in hotkey overlay, which lists every binding live.
-
-<Callout type="info">
-  TODO: once Larch settles on whether it's keeping niri's defaults long-term or adding custom bindings (workspace switching, screenshot keys, launcher), document them here directly instead of pointing at the overlay.
-</Callout>
-
-## What's configured beyond defaults
-
-- **Cursor**: `breeze_cursors`, size 24.
-- **Environment variables** set for spawned processes: `QT_QPA_PLATFORMTHEME=qt6ct` and `XDG_CURRENT_DESKTOP=gnome` (the latter is a portal-compatibility workaround so `xdg-desktop-portal` picks a working backend for screenshots and screen-sharing, not an actual GNOME dependency).
-- **Autostarted at session launch**: the polkit-gnome authentication agent, noctalia (`-d` flag), and swayidle.
-- **Overview zoom**: set to 0.25 for the workspace overview.
-
-## Known limitation
-
-The `QT_QPA_PLATFORMTHEME` environment variable above only reaches processes niri spawns directly. Anything launched through D-Bus/systemd activation (some app launchers, `.desktop`-file activation) doesn't inherit it. See [Known issues](/docs/known-issues) for the practical effect of this on KDE apps.
+<video
+  src="https://github.com/niri-wm/niri/assets/1794388/bce834b0-f205-434e-a027-b373495f9729"
+  controls
+  className="w-full rounded-lg border border-fd-border"
+/>

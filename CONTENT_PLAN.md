@@ -9,9 +9,7 @@ One flat sidebar, ordered as a user journey with contributor content at the bott
 ```
 content/docs/
   index.mdx                          Introduction
-  getting-started/
-    downloading.mdx                  OUTLINE - no release process exists yet
-    live-session.mdx                 real content
+  getting-started.mdx                real content, Download section still OUTLINE (see below)
   desktop-guide/
     niri.mdx                         real content
     noctalia.mdx                     OUTLINE
@@ -34,7 +32,7 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 
 ## What's still an outline, and why
 
-- **`getting-started/downloading.mdx`**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds.
+- **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page (booting in a VM, the installer placeholder) is real content.
 - **`desktop-guide/noctalia.mdx`**: I don't have enough detail on noctalia's actual panel layout, launcher UX, or settings UI from anything documented so far. Needs someone who's actually used it to fill in, or a session spent exploring the live UI.
 - **`using-larch/development-tools.mdx`**: nothing to document yet, see below.
 
@@ -46,7 +44,9 @@ Everything else has real, sourced content pulled from `larch-base/README.md`, `l
 
 `power-management.mdx` documents a real, previously-undocumented gap found while writing it: the live ISO deliberately disables suspend/hibernate/lid-switch via `/etc/systemd/logind.conf.d/do-not-suspend.conf` (correct, intentional for a live session), but `swayidle` is spawned at startup with zero config, no dimming, no lock-on-idle, nothing. The real machine's swayidle setup (dim → screen-off → suspend-then-hibernate) is documented on the page as reference for a future installed-system default, explicitly not yet ported or decided.
 
-`development-tools.mdx` is a pure outline. `packages.x86_64` only has `vim`/`nano`/`tmux` (generic archiso `releng` baseline tools), nothing that backs up the homepage's "tuned for development work" pitch yet. **The homepage copy and this page describe different realities right now** — worth resolving one direction or the other once dev tooling is actually decided.
+`development-tools.mdx` is a pure outline. `packages.x86_64` only has `vim`/`nano`/`tmux` (generic archiso `releng` baseline tools), nothing that backs up the homepage's "tuned for development work" pitch yet.
+
+**This is now a deliberate, docs-first sequencing decision, not an oversight.** The introduction (`index.mdx`) was rewritten to explicitly claim Larch "ships the tools best suited for the jobs developers reach for every day" — asserted as present-tense fact, ahead of the packages that would back it up. The plan (confirmed by the project owner after I flagged the gap) is: write the docs first, add the actual packages after. No specific tool names belong in this copy (an early draft named `incus` as a `virt-manager` replacement; explicitly told not to use that example verbatim, keep it generic). Once real packages land in `packages.x86_64`, `development-tools.mdx` needs real content and the intro's claim needs to actually be true, not just asserted. Don't let this drift, it's a live IOU, not a resolved question.
 
 ## Fumadocs conventions (for whoever touches this next)
 
@@ -54,7 +54,7 @@ Everything else has real, sourced content pulled from `larch-base/README.md`, `l
 - Folders group pages into sidebar sections. A folder needs a `meta.json` with a `pages` array listing the filenames (no extension) in display order. Anything not listed is hidden from nav, even if the file exists.
 - `meta.json` also takes `title` (display name for the group) and `icon`.
 - `root: true` in a folder's `meta.json` turns it into a top-level tab instead of a nested sidebar group, not used here, noting it in case the flat sidebar ever needs splitting later.
-- Default MDX components available: everything from `fumadocs-ui/mdx` (`Callout`, `Cards`/`Card`, code blocks with syntax highlighting, tables). No custom components registered yet, see `src/components/mdx.tsx`.
+- Default MDX components available: everything from `fumadocs-ui/mdx` (`Callout`, `Cards`/`Card`, code blocks with syntax highlighting, tables), plus one custom component: `<DownloadButton />` (`src/components/download-button.tsx`, registered in `src/components/mdx.tsx`). It pulls `downloadUrl` from `@/lib/shared`, same single source of truth the homepage uses, so the placeholder URL only needs updating in one place when real ISO hosting exists.
 - `bun run build` catches MDX syntax errors and broken component references at build time, run it after any content change before calling a page done. It does not validate internal `[text](/docs/...)` links, those can dangle silently.
 
 ## Writing style
@@ -76,9 +76,10 @@ Known placeholders:
 ## Next steps
 
 1. Fill in `noctalia.mdx` once there's real detail to write.
-2. Decide on a release process, then fill in `downloading.mdx` and swap in the real `downloadUrl`.
+2. Decide on a release process, then fill in `getting-started.mdx`'s Download section and swap `downloadUrl` in `src/lib/shared.ts` for the real one (used by both the homepage and `<DownloadButton />`).
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
-4. Once the installer exists, `getting-started/live-session.mdx` and `development/roadmap.mdx` both need updates, they currently describe it as unbuilt.
+4. Once the installer exists, `getting-started.mdx`'s "Installing Larch" section and `development/roadmap.mdx` both need updates, they currently describe it as unbuilt.
 5. Decide on the homepage screenshot/wallpaper question above, and whether a `LICENSE` file should exist.
 6. Decide whether to give the live session (or the eventual installed system) a real swayidle config, currently it runs configured to do nothing. See `using-larch/power-management.mdx`.
-7. Pick actual dev tools to ship, then fill in `development-tools.mdx` and make sure it matches whatever the homepage claims.
+7. **Priority.** Add real developer/power-user tooling to `packages.x86_64` to back up what `index.mdx` and the homepage now claim as present-tense fact. Then fill in `development-tools.mdx` to match. This is the one open item most likely to make the docs look dishonest if it sits too long.
+8. `index.mdx`'s "Project status" now frames the whole project as three stages: finish the live ISO (current focus) → build the installer → keep docs current as an ongoing commitment, not a stage with an end date. `development/roadmap.mdx` still describes things in the older "built / not started" checklist style and doesn't reflect this three-stage framing. Worth reconciling once the roadmap page gets touched again, so the two pages tell the same story.

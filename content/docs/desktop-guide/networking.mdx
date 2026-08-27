@@ -1,6 +1,6 @@
 ---
 title: Networking
-description: NetworkManager, and a VM quirk worth knowing about
+description: The networking software Larch runs by default
 ---
 
-Larch uses NetworkManager, not `systemd-networkd`/`iwd`. This isn't the default for a minimal Arch setup, it's a deliberate choice because noctalia's network panel needs NetworkManager specifically to show its Wi-Fi/Ethernet toggle.
+[NetworkManager](https://networkmanager.dev/), not `systemd-networkd`/`iwd`. Not the default choice for a minimal Arch setup, but noctalia's network panel specifically needs NetworkManager to show its Wi-Fi/Ethernet toggle.
