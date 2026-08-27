@@ -6,7 +6,7 @@ export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
       title: (
-        <span className="flex items-center gap-2 font-semibold">
+        <span className="flex items-center gap-2 font-[family-name:var(--font-display)] font-semibold">
           <Image src="/images/logo.png" alt="" width={22} height={22} className="size-[22px]" />
           {appName}
         </span>

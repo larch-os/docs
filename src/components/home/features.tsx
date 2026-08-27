@@ -27,8 +27,10 @@ export function Features() {
               key={feature.title}
               className="rounded-lg border border-fd-border p-6 transition-colors hover:border-blue-500/40"
             >
-              <h3 className="mb-2 font-semibold text-fd-foreground">{feature.title}</h3>
-              <p className="text-sm text-fd-muted-foreground">{feature.body}</p>
+              <h3 className="mb-2 font-[family-name:var(--font-display)] text-lg font-semibold text-fd-foreground">
+                {feature.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-fd-muted-foreground">{feature.body}</p>
             </div>
           ))}
         </div>
