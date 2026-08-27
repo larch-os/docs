@@ -3,7 +3,9 @@ title: Keyboard shortcuts
 description: Every binding configured in niri, organized by what it does
 ---
 
-`Mod` is the Super (Windows) key, niri's default, not remapped. Everything below is sourced directly from `~/.config/niri/config.d/binds.kdl`, not niri's own defaults, some of niri's stock bindings are intentionally overridden here (see [niri](/docs/desktop-guide/niri) for why).
+`Mod` is the Super (Windows) key, niri's default.
+
+A lot of this is vim-flavored: `H`/`J`/`K`/`L` map to left/down/up/right the same way they do in vim, and the pattern repeats at every scale, moving focus between windows, jumping between workspaces, moving to a different monitor, just with a heavier modifier combo stacked on top each time you go up a level. `J`/`K` are a little smarter than a straight vim mapping: with more than one window stacked in the focused column, they move focus between those windows; with just one window in the column, there's nowhere left to move within it, so they switch workspace instead.
 
 ## Launching things
 
@@ -12,11 +14,8 @@ description: Every binding configured in niri, organized by what it does
 | `Mod+Return` | Open a terminal (kitty) |
 | `Mod+E` | Open the file manager (Dolphin) |
 | `Alt+Space` | Toggle the app launcher |
-| `Alt+W` or `Ctrl+Alt+Space` | Open the window switcher |
 | `Mod+V` | Toggle the clipboard history panel |
-| `F9` | Toggle the top bar |
-| `Mod+Shift+W` | Switch to a random wallpaper |
-| `Super+Alt+L` | Lock the screen |
+| `Mod+Alt+L` | Lock the screen |
 
 ## Window management
 
@@ -51,8 +50,8 @@ description: Every binding configured in niri, organized by what it does
 
 | Shortcut | Action |
 | --- | --- |
-| `Mod+J` | Focus the window below, or the workspace below if already at the bottom of the column |
-| `Mod+K` | Focus the window above, or the workspace above if already at the top of the column |
+| `Mod+J` | With more than one window in the column, focus the one below. With just one window, focus the workspace below instead |
+| `Mod+K` | With more than one window in the column, focus the one above. With just one window, focus the workspace above instead |
 | `Mod+Ctrl+J` | Move the window down, or to the workspace below |
 | `Mod+Ctrl+K` | Move the window up, or to the workspace above |
 | `Mod+Page_Down` / `Mod+U` | Focus the workspace below |
