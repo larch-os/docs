@@ -57,7 +57,7 @@ export function InstallCta() {
   }, []);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-white px-4 py-10 sm:px-8" style={{ padding: '80px 32px' }}>
+    <section ref={ref} className="relative overflow-hidden bg-white px-4 sm:px-8 py-12 sm:py-20 overflow-x-hidden">
       {/* hairline top */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-black/10" />
 

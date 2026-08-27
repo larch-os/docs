@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-white">
       {/* DESIGN.md footer - 4-col, eyebrow mono, body-md, section 80px */}
-      <div className="mx-auto max-w-[1280px] px-8 py-10" style={{ padding: '48px 32px' }}>
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-10 sm:py-12">
         <div className="grid gap-8 text-[14px] leading-[19.6px] sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="text-[11px] font-medium uppercase tracking-[0.55px] text-black/40" style={{ fontFamily: 'var(--font-mono)' }}>

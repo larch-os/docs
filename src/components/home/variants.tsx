@@ -41,7 +41,7 @@ export function Variants() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-white px-4 py-10 sm:px-8" style={{ padding: '80px 32px' }}>
+    <section ref={ref} className="bg-white px-4 sm:px-8 py-12 sm:py-20 overflow-x-hidden">
       <div className="mx-auto max-w-[1280px]">
         <div className="mx-auto max-w-[880px] text-center">
           <p className="inline-flex rounded-[4px] border border-black/10 bg-white px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.55px] text-black/50" style={{ fontFamily: 'var(--font-mono)' }}>

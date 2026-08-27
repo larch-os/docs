@@ -58,7 +58,7 @@ export function HeroRibbon() {
       viewBox="0 0 520 420"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-[360px] w-[520px] max-w-full sm:h-[420px] lg:h-[460px] select-none pointer-events-none"
+      className="h-[280px] w-[320px] max-w-[90vw] sm:h-[360px] sm:w-[420px] lg:h-[460px] lg:w-[520px] select-none pointer-events-none"
       aria-hidden
     >
       <defs>

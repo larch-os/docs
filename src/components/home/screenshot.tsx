@@ -57,8 +57,7 @@ export function Screenshot() {
     <section
       ref={ref}
       id="desktop"
-      className="bg-white px-4 py-10 sm:px-8 sm:py-12"
-      style={{ padding: '80px 32px' }}
+      className="bg-white px-4 sm:px-8 py-12 sm:py-20 overflow-x-hidden"
     >
       <div className="mx-auto max-w-[1280px]">
         <p

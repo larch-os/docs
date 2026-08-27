@@ -86,7 +86,7 @@ export function Pitch() {
   }, []);
 
   return (
-    <section ref={ref} id="pitch" className="bg-[#010120] px-4 py-20 text-white sm:px-8" style={{ padding: '80px 32px' }}>
+    <section ref={ref} id="pitch" className="bg-[#010120] px-4 sm:px-8 py-12 sm:py-20 overflow-x-hidden text-white">
       <div className="mx-auto max-w-[880px]">
         <p
           className="pitch-eyebrow inline-flex rounded-[4px] border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.55px] text-white/70 opacity-0"

@@ -113,8 +113,8 @@ export function Hero() {
   return (
     <section
       ref={rootRef as React.RefObject<HTMLElement>}
-      className="relative overflow-hidden bg-[#010120] text-white"
-      style={{ padding: '96px 32px 180px', minHeight: 'calc(100vh - 56px)' }}
+      className="relative overflow-x-hidden overflow-y-hidden bg-[#010120] text-white px-4 sm:px-8 pt-10 sm:pt-24 pb-40 sm:pb-44"
+      style={{ minHeight: 'calc(100vh - 56px)' }}
     >
       {/* niri strip - pinned to bottom edge, outside text flow */}
       <NiriStrip />
@@ -122,7 +122,7 @@ export function Hero() {
       {/* subtle top hairline - elevation lvl 2 */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
 
-      <div className="relative mx-auto grid max-w-[1280px] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+      <div className="relative mx-auto grid max-w-[1280px] items-center gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         {/* left - copy */}
         <div className="relative max-w-[640px]">
           {/* eyebrow - simplified, was cluttered: “Larch - Arch for lazy yet power users · niri” */}
@@ -139,25 +139,25 @@ export function Hero() {
               Distro
             </span>
 
-            <span className="hero-word flex flex-wrap items-baseline gap-x-3 opacity-0">
-              <span className="text-lg font-light tracking-tight text-white/55 sm:text-2xl md:text-[30px]">for</span>
+            <span className="hero-word flex flex-wrap items-baseline gap-x-2.5 sm:gap-x-3 opacity-0">
+              <span className="text-base font-light tracking-tight text-white/55 sm:text-2xl md:text-[30px]">for</span>
               <span
-                className="font-display text-[64px] font-medium italic leading-[0.9] tracking-[-1.92px] text-white sm:text-[80px] lg:text-[84px]"
+                className="font-display text-[46px] font-medium italic leading-[0.9] tracking-[-1.2px] text-white sm:text-[64px] lg:text-[84px] sm:tracking-[-1.92px]"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 lazy
               </span>
             </span>
 
-            <span className="hero-word flex flex-wrap items-baseline gap-x-3 opacity-0">
-              <span className="text-lg font-light tracking-tight text-white/55 sm:text-2xl md:text-[30px]">yet</span>
+            <span className="hero-word flex flex-wrap items-baseline gap-x-2.5 sm:gap-x-3 opacity-0">
+              <span className="text-base font-light tracking-tight text-white/55 sm:text-2xl md:text-[30px]">yet</span>
               <span
-                className="font-display inline-block bg-gradient-to-r from-[#0060e0] via-[#3b82f6] to-[#bdbbff] bg-clip-text text-[52px] font-medium leading-[0.9] tracking-[-1.2px] text-transparent sm:text-[68px] lg:text-[76px]"
+                className="font-display inline-block bg-gradient-to-r from-[#0060e0] via-[#3b82f6] to-[#bdbbff] bg-clip-text text-[40px] font-medium leading-[0.9] tracking-[-0.9px] text-transparent sm:text-[52px] lg:text-[76px] sm:tracking-[-1.2px]"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 power
               </span>
-              <span className="text-lg font-light tracking-tight text-white/55 sm:text-2xl md:text-[28px]">users.</span>
+              <span className="text-base font-light tracking-tight text-white/55 sm:text-2xl md:text-[28px]">users.</span>
             </span>
 
             {/* hairline stripe - logo blue */}
@@ -169,35 +169,35 @@ export function Hero() {
           </h1>
 
           <div
-            className="hero-word mt-8 max-w-[560px] space-y-3 text-[18px] leading-[23.4px] tracking-[-0.18px] text-white/70 opacity-0"
+            className="hero-word mt-6 sm:mt-8 max-w-[560px] space-y-3 text-[16px] leading-[21px] tracking-[-0.12px] text-white/70 sm:text-[18px] sm:leading-[23.4px] sm:tracking-[-0.18px] opacity-0"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             <p>
               Boots into a desktop that is already set up to move fast: dark theme, niri scrollable tiling, everything a keystroke away, so you are getting to work, not setting it up.
             </p>
-            <p className="text-white/55 text-[16px] leading-[20.8px] tracking-[-0.16px]">
+            <p className="text-white/55 text-[15px] leading-[20px] tracking-[-0.12px] sm:text-[16px] sm:leading-[20.8px] sm:tracking-[-0.16px]">
               Real Arch underneath, <span className="font-medium text-white/85">no custom repo, no abstraction</span>. The weekday you save is not installing, it is staying out of the way after.
             </p>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
             <Link
               href={downloadUrl}
-              className="hero-cta inline-flex items-center justify-center rounded-[4px] bg-[#0060e0] px-6 py-3 text-[16px] font-medium uppercase tracking-[0.08px] text-white opacity-0 shadow-[0_4px_14px_rgba(0,96,224,0.28)] transition hover:bg-[#0052c8] hover:scale-[1.01] active:scale-[0.99]"
+              className="hero-cta inline-flex w-full sm:w-auto items-center justify-center rounded-[4px] bg-[#0060e0] px-6 py-3 text-[14px] sm:text-[16px] font-medium uppercase tracking-[0.08px] text-white opacity-0 shadow-[0_4px_14px_rgba(0,96,224,0.28)] transition hover:bg-[#0052c8] hover:scale-[1.01] active:scale-[0.99]"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               Download ISO
             </Link>
             <Link
               href="#stack"
-              className="hero-cta inline-flex items-center justify-center rounded-[4px] bg-white px-6 py-3 text-[16px] font-medium uppercase tracking-[0.08px] text-black opacity-0 shadow-[0_2px_10px_rgba(0,0,0,0.12)] transition hover:bg-zinc-50 hover:scale-[1.01] active:scale-[0.99]"
+              className="hero-cta inline-flex w-full sm:w-auto items-center justify-center rounded-[4px] bg-white px-6 py-3 text-[14px] sm:text-[16px] font-medium uppercase tracking-[0.08px] text-black opacity-0 shadow-[0_2px_10px_rgba(0,0,0,0.12)] transition hover:bg-zinc-50 hover:scale-[1.01] active:scale-[0.99]"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               Explore the desktop
             </Link>
             <Link
               href="/docs"
-              className="hero-cta inline-flex items-center justify-center rounded-[4px] border border-white/20 bg-white/[0.06] px-6 py-3 text-[16px] font-medium uppercase tracking-[0.08px] text-white opacity-0 backdrop-blur transition hover:bg-white/10 hover:border-white/30"
+              className="hero-cta inline-flex w-full sm:w-auto items-center justify-center rounded-[4px] border border-white/20 bg-white/[0.06] px-6 py-3 text-[14px] sm:text-[16px] font-medium uppercase tracking-[0.08px] text-white opacity-0 backdrop-blur transition hover:bg-white/10 hover:border-white/30"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               Read the docs

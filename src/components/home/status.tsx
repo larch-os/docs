@@ -97,7 +97,7 @@ export function Status() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-[#010120] px-4 py-10 sm:px-8" style={{ padding: '80px 32px' }}>
+    <section ref={ref} className="bg-[#010120] px-4 sm:px-8 py-12 sm:py-20 overflow-x-hidden">
       <div className="mx-auto max-w-[1280px]">
         <div className="mx-auto max-w-[880px]">
           <p className="inline-flex rounded-[4px] border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.55px] text-white/70" style={{ fontFamily: 'var(--font-mono)' }}>

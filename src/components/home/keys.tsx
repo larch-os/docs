@@ -178,7 +178,7 @@ export function Keys() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-[#010120] px-8" style={{ padding: '96px 32px 80px' }}>
+    <section ref={ref} className="bg-[#010120] px-4 sm:px-8 py-12 sm:py-20 overflow-x-hidden">
       <div className="mx-auto max-w-[1280px]">
         <div className="mx-auto max-w-[880px]">
           <p className="inline-flex rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-white/60" style={{ fontFamily: 'var(--font-mono)' }}>
