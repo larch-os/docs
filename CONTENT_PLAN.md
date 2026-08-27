@@ -10,6 +10,10 @@ One flat sidebar, ordered as a user journey with contributor content at the bott
 content/docs/
   index.mdx                          Introduction
   getting-started.mdx                real content, Download section still OUTLINE (see below)
+  iso-variants/
+    larch-base.mdx                   real content, uses the same homepage screenshot
+    larch-dank-shell.mdx             PLACEHOLDER - variant doesn't exist
+    larch-hyprland.mdx               PLACEHOLDER - variant doesn't exist
   software-guide/
     niri.mdx                         real content
     noctalia.mdx                     OUTLINE
@@ -33,7 +37,19 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 
 - **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page (booting in a VM, the installer placeholder) is real content.
 - **`software-guide/noctalia.mdx`**: needs the same lean treatment niri got (GitHub link + their own official demo video, nothing else). Blocked on the video specifically: noctalia's repo has no demo video or screenshot anywhere (checked the README and searched beyond it), only third-party YouTube content, which isn't the same thing as an official upstream demo. Waiting on a real URL rather than substituting one.
+- **`iso-variants/larch-dank-shell.mdx`** and **`iso-variants/larch-hyprland.mdx`**: neither variant exists, no repo, no packages, no screenshot. Pure placeholders, explicitly authorized as such rather than left unwritten, so the section's shape exists before the content does.
+
 Everything else has real, sourced content pulled from `larch-base/README.md`, `larch-base/docs/session-context.md`, `larch-base/docs/arch-niri-distro-context.md`, and direct inspection of the actual config files in `archiso/releng/airootfs/`.
+
+## ISO variants section
+
+One page per variant, named after its future repo (`larch-base`, `larch-dank-shell`, `larch-hyprland`), matching the `larch-os` GitHub org's naming convention decided earlier this project (see [[project-larch-docs-site]] memory on the multi-variant architecture). Same structure on every page: status callout, screenshot, software list, repo link.
+
+`larch-base.mdx` reuses `/images/desktop-screenshot.png`, the same file the homepage uses, one real screenshot, not two to keep in sync.
+
+`larch-hyprland.mdx` corrects the spelling from how it was requested ("larch-hyperland") to the actual project name, Hyprland. Also worth knowing: noctalia supports Hyprland natively (confirmed via web search, not assumed), so pairing Hyprland with noctalia instead of a different shell is plausible, the page says so rather than assuming a shell swap is required.
+
+Once there's more than one real variant, `getting-started.mdx`'s Download section will need to point here instead of a single download button, it currently assumes one ISO.
 
 ## User guide section
 
@@ -80,3 +96,4 @@ Known placeholders:
 6. Ship the swayidle config, sleep.conf, and logind.conf settings `user-guide/power-management.mdx` now describes as fact. Live ISO still disables suspend/hibernate/lid-switch entirely and runs swayidle with zero config.
 7. **Priority.** Add real developer/power-user tooling to `packages.x86_64` to back up what `index.mdx` and the homepage now claim as present-tense fact. Then add entries for it in Software guide. This is the one open item most likely to make the docs look dishonest if it sits too long.
 8. `index.mdx`'s "Project status" now frames the whole project as three stages: finish the live ISO (current focus) → build the installer → keep docs current as an ongoing commitment, not a stage with an end date. `development/roadmap.mdx` still describes things in the older "built / not started" checklist style and doesn't reflect this three-stage framing. Worth reconciling once the roadmap page gets touched again, so the two pages tell the same story.
+9. Fill in `larch-dank-shell.mdx` and `larch-hyprland.mdx` once those variants actually exist (repo, screenshot, real package list). Once either does, `getting-started.mdx`'s single Download button needs to become a choice between variants.

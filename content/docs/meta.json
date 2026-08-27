@@ -3,6 +3,7 @@
   "pages": [
     "index",
     "getting-started",
+    "iso-variants",
     "software-guide",
     "user-guide",
     "package-management",
