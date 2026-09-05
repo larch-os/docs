@@ -6,10 +6,10 @@ export function Screenshot() {
       <div className="mx-auto max-w-5xl">
         <div className="overflow-hidden rounded-xl border border-fd-border shadow-2xl shadow-blue-950/20">
           <Image
-            src="/images/desktop-screenshot.png"
+            src="https://github.com/user-attachments/assets/3327db16-d57b-425b-ae0a-1ae75e4e80c3"
             alt="The Larch live desktop: niri with the noctalia panel running along the top"
-            width={1360}
-            height={768}
+            width={1920}
+            height={1080}
             className="w-full"
             priority={false}
           />

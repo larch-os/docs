@@ -1,0 +1,42 @@
+---
+title: Installation guide
+description: What each step of the Calamares installer actually does
+---
+
+Launch the installer from the install button on the noctalia bar. Nine steps, in order.
+
+## 1. Welcome
+
+Checks the basics: enough RAM, enough disk space, a real UEFI system. Internet is checked too, but isn't required to continue.
+
+## 2. Language
+
+Pick the display language for the installed system.
+
+## 3. Keyboard layout
+
+Pick a layout and variant, with a text box to test it before moving on.
+
+## 4. Partitioning
+
+Erase the disk, install alongside another OS, or partition manually. `/boot` always gets its own unencrypted partition. Encryption is on by default (LUKS on root), with a checkbox to turn it off.
+
+## 5. Create your account
+
+Set a username, password, and hostname. The shell is zsh, and the niri/noctalia setup carries over from the live session either way.
+
+## 6. Optional extras
+
+Add Docker, Incus, or Chromium. None are selected by default.
+
+## 7. Summary
+
+Review every choice made so far. Nothing gets written to disk until you confirm here.
+
+## 8. Installing
+
+Partitions the disk, unpacks the base system, installs a few packages ([Default apps](/docs/software-guide/default-apps) plus whatever was picked in extras), sets up the bootloader, then removes Calamares itself from the new install.
+
+## 9. Finished
+
+Reboot into the installed system.

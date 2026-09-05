@@ -19,7 +19,12 @@ content/docs/
     noctalia.mdx                     OUTLINE
     shell-and-terminal.mdx           real content
     networking.mdx                   real content
+    default-apps.mdx                 real content, chezmoi/pass/Pika Backup/herdr --
+                                      the installer's own default package list
+                                      (packages.conf's static try_install), not
+                                      the netinstall extras page
   user-guide/
+    installation-guide.mdx           real content, one short section per Calamares step
     keyboard-shortcuts.mdx           real content
     power-management.mdx             describes the installed system's swayidle setup, not yet actually shipped, see below
   package-management.mdx             real content
@@ -35,7 +40,7 @@ Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs h
 
 ## What's still an outline, and why
 
-- **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page (booting in a VM, the installer placeholder) is real content.
+- **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page, including "Installing Larch", is real content now: the installer exists and has completed real end-to-end installs (encryption, GRUB, first boot all confirmed).
 - **`software-guide/noctalia.mdx`**: needs the same lean treatment niri got (GitHub link + their own official demo video, nothing else). Blocked on the video specifically: noctalia's repo has no demo video or screenshot anywhere (checked the README and searched beyond it), only third-party YouTube content, which isn't the same thing as an official upstream demo. Waiting on a real URL rather than substituting one.
 - **`iso-variants/larch-dank-shell.mdx`** and **`iso-variants/larch-hyprland.mdx`**: neither variant exists, no repo, no packages, no screenshot. Pure placeholders, explicitly authorized as such rather than left unwritten, so the section's shape exists before the content does.
 
@@ -45,13 +50,15 @@ Everything else has real, sourced content pulled from `larch-base/README.md`, `l
 
 One page per variant, named after its future repo (`larch-base`, `larch-dank-shell`, `larch-hyprland`), matching the `larch-os` GitHub org's naming convention decided earlier this project (see [[project-larch-docs-site]] memory on the multi-variant architecture). Same structure on every page: status callout, screenshot, software list, repo link.
 
-`larch-base.mdx` reuses `/images/desktop-screenshot.png`, the same file the homepage uses, one real screenshot, not two to keep in sync.
+`larch-base.mdx` and the homepage both point at the same hero image URL (`github.com/user-attachments/assets/...`, from `larch-base`'s own README), one real screenshot, not two to keep in sync. Not a local file anymore, the old `/images/desktop-screenshot.png` was removed once nothing referenced it. That URL is a short-lived signed S3 redirect under the hood, `next.config.mjs`'s `images.remotePatterns` allows both `github.com` and `*.s3.amazonaws.com` so next/image can actually follow it.
 
 `larch-hyprland.mdx` corrects the spelling from how it was requested ("larch-hyperland") to the actual project name, Hyprland. Also worth knowing: noctalia supports Hyprland natively (confirmed via web search, not assumed), so pairing Hyprland with noctalia instead of a different shell is plausible, the page says so rather than assuming a shell swap is required.
 
 Once there's more than one real variant, `getting-started.mdx`'s Download section will need to point here instead of a single download button, it currently assumes one ISO.
 
 ## User guide section
+
+`installation-guide.mdx` walks through the Calamares flow one step at a time (welcome, language, keyboard, partitioning, account, extras, summary, installing, finished), one short paragraph per step, sourced from `settings.conf`'s actual `show` sequence in `larch-calamares`, not a general description. Linked from `getting-started.mdx`'s "Installing Larch" section, which stays the high-level summary; this page is the detail.
 
 `keyboard-shortcuts.mdx` is sourced directly from `~/.config/niri/config.d/binds.kdl` (the real machine's config, already ported to the ISO verbatim, see [[project-larch-overview]]-adjacent memory on the niri config diff), organized into the categories the bindings actually fall into: launching, window management, workspace management, monitor management, screenshots, media/hardware keys, session.
 
@@ -78,12 +85,11 @@ Every page here should pass the `unslop` skill (`/home/anish/Documents/dev/incus
 
 `src/app/(home)/page.tsx` composes four sections from `src/components/home/`: `hero.tsx`, `screenshot.tsx`, `features.tsx`, `footer.tsx`. Built dark-first (the site's `RootProvider` defaults to dark regardless of OS preference, this isn't something the homepage components control), using `fd-*` semantic color tokens throughout so it still adapts correctly if a visitor toggles to light mode manually.
 
-Assets live in `public/images/`: `logo.png` (copied from `larch/assets/logo.png`) and `desktop-screenshot.png` (a real `grim` capture from the test VM, not a mockup).
+Assets live in `public/images/`: just `logo.png` now (copied from `larch/assets/logo.png`). The screenshot isn't a local asset, see the ISO variants section above.
 
 Known placeholders:
 
 - **Download button** (`src/lib/shared.ts`, `downloadUrl`) points at `https://cdn.larch-os.dev/larch-latest.iso`, which doesn't exist yet. Marked with a `TODO` comment. Replace once ISO hosting is live.
-- **`desktop-screenshot.png`** is the project's actual personal wallpaper (a stylized illustrated figure, replicated verbatim from the real machine per the project's convention). It's genuine, not staged, but it's a personal aesthetic choice on a now-public marketing page. Worth a deliberate call on whether that's the permanent choice.
 - No `LICENSE` file exists anywhere in the `larch` repo, so the footer doesn't link one. Worth adding regardless of the homepage.
 
 ## Next steps
@@ -91,8 +97,8 @@ Known placeholders:
 1. Fill in `noctalia.mdx` once there's a real demo video URL for it (see above, blocked on that specifically now, not general detail).
 2. Decide on a release process, then fill in `getting-started.mdx`'s Download section and swap `downloadUrl` in `src/lib/shared.ts` for the real one (used by both the homepage and `<DownloadButton />`).
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
-4. Once the installer exists, `getting-started.mdx`'s "Installing Larch" section and `development/roadmap.mdx` both need updates, they currently describe it as unbuilt.
-5. Decide on the homepage screenshot/wallpaper question above, and whether a `LICENSE` file should exist.
+4. `getting-started.mdx`'s "Installing Larch" section is updated, the installer exists now. `development/roadmap.mdx` still needs the same update, it still describes the installer as unbuilt.
+5. Homepage screenshot question resolved: both it and `larch-base.mdx` now use the same `larch-base` README hero image URL. Still open: whether a `LICENSE` file should exist.
 6. Ship the swayidle config, sleep.conf, and logind.conf settings `user-guide/power-management.mdx` now describes as fact. Live ISO still disables suspend/hibernate/lid-switch entirely and runs swayidle with zero config.
 7. **Priority.** Add real developer/power-user tooling to `packages.x86_64` to back up what `index.mdx` and the homepage now claim as present-tense fact. Then add entries for it in Software guide. This is the one open item most likely to make the docs look dishonest if it sits too long.
 8. `index.mdx`'s "Project status" now frames the whole project as three stages: finish the live ISO (current focus) → build the installer → keep docs current as an ongoing commitment, not a stage with an end date. `development/roadmap.mdx` still describes things in the older "built / not started" checklist style and doesn't reflect this three-stage framing. Worth reconciling once the roadmap page gets touched again, so the two pages tell the same story.
