@@ -7,8 +7,8 @@ description: Download Larch, boot it in a VM, and try the live desktop
 
 <DownloadButton />
 
-<Callout type="warn">
-  No public release process exists yet, ISOs are built locally right now. Once builds are published somewhere (GitHub Releases is the likely candidate), this section needs a real checksum/verification step and minimum specs (RAM, GPU requirements) added.
+<Callout type="info">
+  This is a preview build, not the first official release yet (that'll be a named version, "Steady Kaizen"). Read more on the [blog](/blog/first-public-iso). No checksum/verification step or minimum specs (RAM, GPU requirements) documented yet.
 </Callout>
 
 ## Boot it in a VM
@@ -32,7 +32,7 @@ The flow: welcome, language, keyboard layout, partitioning, user account, option
 - **Encryption**: on by default, with an opt-out checkbox. LUKS encrypts root; swap is zram, not a disk partition, so there's nothing else to encrypt.
 - **Bootloader**: GRUB, with Larch's own theme, installed automatically. No separate configuration screen.
 - **User account**: the shell is zsh, and niri/noctalia/zsh config carries over from the live session, same setup either way.
-- **Packages**: `chezmoi`, `pass`, Pika Backup, and `herdr` install automatically (see [Default apps](/docs/software-guide/default-apps)). The extras screen adds Docker, Incus, or Chromium on top, none selected by default.
+- **Packages**: `chezmoi`, `pass`, and Pika Backup install automatically (see [Default apps](/docs/software-guide/default-apps)), on top of the dev/power-user tooling already in the base system (see [Development tools](/docs/software-guide/development-tools)). The extras screen adds Docker, Incus, or Chromium, none selected by default.
 
 Calamares itself gets removed from the installed system once setup finishes, it's only needed once.
 

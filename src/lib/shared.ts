@@ -9,5 +9,6 @@ export const gitConfig = {
   branch: 'main',
 };
 
-// TODO: replace with the real CDN URL once ISO hosting is live.
-export const downloadUrl = 'https://cdn.larch-os.dev/larch-latest.iso';
+// Dated filename, not a "latest" alias -- no such redirect exists yet at this
+// bucket. Update this each time a new build gets published, until one does.
+export const downloadUrl = 'https://storage.googleapis.com/larch-os/iso/larch-2026.09.06-x86_64.iso';

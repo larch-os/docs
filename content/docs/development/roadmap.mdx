@@ -10,11 +10,12 @@ description: What's built, what's designed, and what's still open
 - [x] Live-session config: niri/noctalia/theming replicated from a real working setup, `larch` live user with SDDM autologin into niri.
 - [x] Installer: [Calamares](https://calamares.io/)-based (`larch-calamares`), not the custom TUI originally planned (see below). Encryption on by default with opt-out, a separate unencrypted `/boot` partition, GRUB with Larch's theme, zram swap, auto-launches on live boot. Real end-to-end installs confirmed working. See [Installation guide](/docs/user-guide/installation-guide).
 - [x] Installed-user provisioning: the installer-created user gets the same niri/noctalia/zsh setup as the live session, with an `install-overrides/` mechanism for the few things that have to differ once Calamares itself is gone (e.g. the noctalia bar's install button).
+- [x] Public download hosting for preview builds, see [the blog](/blog/first-public-iso).
 
 ## Not built
 
+- [ ] The first official release, named "Steady Kaizen". Preview ISOs are downloadable now, but this hasn't shipped yet.
 - [ ] `larch-dank-shell` and `larch-hyprland` variants (no repo, no packages, no screenshot yet).
-- [ ] Public release/download hosting (ISOs are built locally right now).
 - [ ] A `LICENSE` file.
 
 ## Why Calamares, not a custom TUI

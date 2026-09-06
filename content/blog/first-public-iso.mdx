@@ -1,0 +1,25 @@
+---
+title: The first downloadable Larch ISO
+description: A working live desktop, a real installer, and what's actually on it
+date: '2026-09-06'
+---
+
+Larch has a public ISO now: [download it here](https://storage.googleapis.com/larch-os/iso/larch-2026.09.06-x86_64.iso).
+
+This is a preview build, not the first official release. That'll be a named version, "Steady Kaizen", once the remaining rough edges are gone. For now, here's what's actually in this one.
+
+## The live desktop
+
+Boot it and you're straight into niri + noctalia, no setup required: keybindings wired in, dark theme, kitty as the terminal. Nothing to configure before it's usable.
+
+## A real installer
+
+The install button on the bar launches automatically on boot. It's [Calamares](https://calamares.io/)-based, and end-to-end installs are confirmed working: disk encryption on by default (LUKS, opt-out available), a separate unencrypted `/boot` partition, GRUB with a custom theme, zram for swap.
+
+## Tooling that's actually there
+
+`btop`, `htop`, `lazygit`, `paru`, `uv`, `k3d`, `kubectl`, `herdr` all ship in the base system, live and installed alike. See [Development tools](/docs/software-guide/development-tools) for what each one does.
+
+## Try it
+
+[Getting started](/docs/getting-started) covers booting it in a VM and what to expect from the installer.

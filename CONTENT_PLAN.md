@@ -9,7 +9,7 @@ One flat sidebar, ordered as a user journey with contributor content at the bott
 ```
 content/docs/
   index.mdx                          Introduction
-  getting-started.mdx                real content, Download section still OUTLINE (see below)
+  getting-started.mdx                real content, incl. Download (real URL now, see below)
   iso-variants/
     larch-base.mdx                   real content, uses the same homepage screenshot
     larch-dank-shell.mdx             PLACEHOLDER - variant doesn't exist
@@ -39,13 +39,16 @@ content/docs/
     building-the-iso.mdx             real content
     testing-in-a-vm.mdx              real content
     roadmap.mdx                      real content
+
+content/blog/                        separate collection, not under content/docs/ --
+                                      see "Blog section" below
+  first-public-iso.mdx                real content, the first post
 ```
 
 Ordering is controlled by `meta.json`'s `pages` array in each folder (Fumadocs hides anything not listed there). No `root: true` tabs used, that's what a two-tab layout needs, not applicable here.
 
 ## What's still an outline, and why
 
-- **`getting-started.mdx`'s Download section**: no public release process exists. Larch ISOs are built locally right now. Fill in once there's a real download location (likely GitHub Releases, given the repo lives at `github.com/larch-os/larch-base`) and a decision on whether to GPG-sign builds. The rest of the page, including "Installing Larch", is real content now: the installer exists and has completed real end-to-end installs (encryption, GRUB, first boot all confirmed).
 - **`software-guide/noctalia.mdx`**: needs the same lean treatment niri got (GitHub link + their own official demo video, nothing else). Blocked on the video specifically: noctalia's repo has no demo video or screenshot anywhere (checked the README and searched beyond it), only third-party YouTube content, which isn't the same thing as an official upstream demo. Waiting on a real URL rather than substituting one.
 - **`iso-variants/larch-dank-shell.mdx`** and **`iso-variants/larch-hyprland.mdx`**: neither variant exists, no repo, no packages, no screenshot. Pure placeholders, explicitly authorized as such rather than left unwritten, so the section's shape exists before the content does.
 
@@ -60,6 +63,14 @@ One page per variant, named after its future repo (`larch-base`, `larch-dank-she
 `larch-hyprland.mdx` corrects the spelling from how it was requested ("larch-hyperland") to the actual project name, Hyprland. Also worth knowing: noctalia supports Hyprland natively (confirmed via web search, not assumed), so pairing Hyprland with noctalia instead of a different shell is plausible, the page says so rather than assuming a shell swap is required.
 
 Once there's more than one real variant, `getting-started.mdx`'s Download section will need to point here instead of a single download button, it currently assumes one ISO.
+
+## Blog section
+
+New, separate from `content/docs/`: `content/blog/*.mdx`, a standalone `defineCollections({ type: 'doc', ... })` (not `defineDocs`, which is only for a docs+meta pair with a sidebar tree -- a blog is just a flat, date-sorted list, no tree needed). Schema (`src/lib/blog-source.ts`, zod, added as an explicit dependency since fumadocs-mdx only pulled it in transitively before): `title`, `description`, `date` (ISO string, sorted newest-first).
+
+Routes live at `src/app/blog/` (`layout.tsx`, `page.tsx` for the list, `[slug]/page.tsx` for posts), using `HomeLayout` + `baseOptions()` like the homepage, not `DocsLayout` -- no sidebar tree makes sense for a blog. Post bodies render through `DocsBody` (a standalone prose-styled wrapper, doesn't need the full `DocsPage` context) for consistent typography with the rest of the site. "Blog" added to the shared nav `links` in `layout.shared.tsx`, visible from both the homepage and docs pages.
+
+First post, `first-public-iso.mdx`: announces the first publicly downloadable ISO. Explicitly **not** the first official release -- that's a separate, named milestone ("Steady Kaizen", chosen by the project owner, not yet shipped). Keep this distinction accurate wherever the ISO or release status comes up; conflating "a build exists to download" with "we shipped v1" would overstate where the project actually is.
 
 ## User guide section
 
@@ -93,7 +104,8 @@ New `development-tools.mdx` documents all of that (plus `herdr`, moved here). Th
 - Folders group pages into sidebar sections. A folder needs a `meta.json` with a `pages` array listing the filenames (no extension) in display order. Anything not listed is hidden from nav, even if the file exists.
 - `meta.json` also takes `title` (display name for the group) and `icon`.
 - `root: true` in a folder's `meta.json` turns it into a top-level tab instead of a nested sidebar group, not used here, noting it in case the flat sidebar ever needs splitting later.
-- Default MDX components available: everything from `fumadocs-ui/mdx` (`Callout`, `Cards`/`Card`, code blocks with syntax highlighting, tables), plus one custom component: `<DownloadButton />` (`src/components/download-button.tsx`, registered in `src/components/mdx.tsx`). It pulls `downloadUrl` from `@/lib/shared`, same single source of truth the homepage uses, so the placeholder URL only needs updating in one place when real ISO hosting exists.
+- Default MDX components available: everything from `fumadocs-ui/mdx` (`Callout`, `Cards`/`Card`, code blocks with syntax highlighting, tables), plus one custom component: `<DownloadButton />` (`src/components/download-button.tsx`, registered in `src/components/mdx.tsx`). It pulls `downloadUrl` from `@/lib/shared`, same single source of truth the homepage uses.
+- `defineDocs` (docs+meta pair, sidebar tree) vs `defineCollections({ type: 'doc' })` (a flat, standalone collection, no tree) are two different `fumadocs-mdx/macro` APIs. Use the latter for anything that isn't sidebar-navigated content, like the blog.
 - `bun run build` catches MDX syntax errors and broken component references at build time, run it after any content change before calling a page done. It does not validate internal `[text](/docs/...)` links, those can dangle silently.
 
 ## Writing style
@@ -108,18 +120,19 @@ Assets live in `public/images/`: just `logo.png` now (copied from `larch/assets/
 
 Known placeholders:
 
-- **Download button** (`src/lib/shared.ts`, `downloadUrl`) points at `https://cdn.larch-os.dev/larch-latest.iso`, which doesn't exist yet. Marked with a `TODO` comment. Replace once ISO hosting is live.
+- **Download button** (`src/lib/shared.ts`, `downloadUrl`) now points at a real, public GCS-hosted ISO. It's a dated filename, not a "latest" alias, no such redirect exists at that bucket yet -- update this constant by hand each time a new build gets published, until one does.
 - No `LICENSE` file exists anywhere in the `larch` repo, so the footer doesn't link one. Worth adding regardless of the homepage.
 
 ## Next steps
 
-Resolved this pass: installer documented as built (`getting-started.mdx`, `installation-guide.mdx`, `roadmap.mdx`, `index.mdx`'s Project status table all agree now), real dev/power-user tooling landed in `packages.x86_64` with `development-tools.mdx` to document it, homepage screenshot question settled, `architecture.mdx` no longer describes an abandoned design.
+Resolved this pass: installer documented as built (`getting-started.mdx`, `installation-guide.mdx`, `roadmap.mdx`, `index.mdx`'s Project status table all agree now), real dev/power-user tooling landed in `packages.x86_64` with `development-tools.mdx` to document it, homepage screenshot question settled, `architecture.mdx` no longer describes an abandoned design. Also this pass: real public download URL live, a Blog section shipped with its first post.
 
 Still open:
 
 1. Fill in `noctalia.mdx` once there's a real demo video URL for it (see above, blocked on that specifically now, not general detail).
-2. Decide on a release process, then fill in `getting-started.mdx`'s Download section and swap `downloadUrl` in `src/lib/shared.ts` for the real one (used by both the homepage and `<DownloadButton />`).
+2. The first official release, "Steady Kaizen", hasn't shipped -- when it does, `getting-started.mdx`'s preview-build callout and the blog post's framing both need updating to say so, and `roadmap.mdx`'s "Not built" list loses that line.
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
 4. Whether a `LICENSE` file should exist.
 5. Ship the swayidle config, sleep.conf, and logind.conf settings `user-guide/power-management.mdx` now describes as fact. Live ISO still disables suspend/hibernate/lid-switch entirely and runs swayidle with zero config.
 6. Fill in `larch-dank-shell.mdx` and `larch-hyprland.mdx` once those variants actually exist (repo, screenshot, real package list). Once either does, `getting-started.mdx`'s single Download button needs to become a choice between variants.
+7. A checksum/verification step and minimum specs (RAM, GPU requirements) for the Download section -- not added yet.
