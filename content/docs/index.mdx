@@ -13,19 +13,17 @@ The project's own tagline: "Arch based linux distro for lazy yet power users." L
 
 Larch is being built in three stages:
 
-1. **A finished live ISO.** Every tool and setting the distro promises actually present, so booting it is the real experience, not a preview of one. This is the current focus.
-2. **An installer.** Turns that live session into an installed system. Design exists, no code yet, see [Roadmap](/docs/development/roadmap).
+1. **A finished live ISO.** Every tool and setting the distro promises actually present, so booting it is the real experience, not a preview of one.
+2. **An installer.** Turns that live session into an installed system. Built, and real end-to-end installs have completed successfully. This is the current focus, closing remaining gaps.
 3. **Docs kept current.** Not a stage with an end date, an ongoing commitment as the first two stages change.
 
 Where things stand today:
 
 | Piece | Status |
 | --- | --- |
-| Live/bootable ISO | Boots, autologin into niri + noctalia. Tooling and setup still being filled in. |
-| Installer | Not built yet. |
-| Post-install provisioning (shell/desktop-shell choice at install time) | Not built yet, depends on the installer. |
-
-Until the installer exists, Larch is a live-boot-only experience. There's no "installation" section in these docs yet, because there's nothing to document.
+| Live/bootable ISO | Boots, autologin into niri + noctalia. Ships real dev/power-user tooling (see [Software guide](/docs/software-guide)), not just the desktop shell. |
+| Installer | Built ([Calamares](https://calamares.io/)-based, see [Installation guide](/docs/user-guide/installation-guide)). Encryption, GRUB, and first boot all confirmed on real test installs. |
+| Post-install provisioning | Built: the installed user gets the same niri/noctalia/zsh setup as the live session. There's no shell/desktop-shell choice at install time, just the one Larch ships. |
 
 ## Where to go next
 

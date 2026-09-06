@@ -19,10 +19,15 @@ content/docs/
     noctalia.mdx                     OUTLINE
     shell-and-terminal.mdx           real content
     networking.mdx                   real content
-    default-apps.mdx                 real content, chezmoi/pass/Pika Backup/herdr --
+    default-apps.mdx                 real content, chezmoi/pass/Pika Backup --
                                       the installer's own default package list
                                       (packages.conf's static try_install), not
                                       the netinstall extras page
+    development-tools.mdx            real content, htop/btop/lazygit/paru/uv/
+                                      k3d/kubectl/herdr -- base packages.x86_64
+                                      now, live and installed alike (herdr moved
+                                      here from default-apps.mdx, no longer
+                                      install-time-only)
   user-guide/
     installation-guide.mdx           real content, one short section per Calamares step
     keyboard-shortcuts.mdx           real content
@@ -62,11 +67,25 @@ Once there's more than one real variant, `getting-started.mdx`'s Download sectio
 
 `keyboard-shortcuts.mdx` is sourced directly from `~/.config/niri/config.d/binds.kdl` (the real machine's config, already ported to the ISO verbatim, see [[project-larch-overview]]-adjacent memory on the niri config diff), organized into the categories the bindings actually fall into: launching, window management, workspace management, monitor management, screenshots, media/hardware keys, session.
 
-`power-management.mdx` was rewritten to only describe the installed system's target power management (the real machine's dim → screen-off → suspend-then-hibernate swayidle setup, plus the sleep.conf/logind.conf settings it pairs with). Same docs-first sequencing call as `development-tools.mdx`: none of this is actually shipped in the live ISO yet (which still deliberately disables suspend/hibernate/lid-switch via `/etc/systemd/logind.conf.d/do-not-suspend.conf`, and spawns `swayidle -w` with zero config), the page just no longer says so. Don't let this drift either, it needs to become true, not stay aspirational.
+`power-management.mdx` was rewritten to only describe the installed system's target power management (the real machine's dim → screen-off → suspend-then-hibernate swayidle setup, plus the sleep.conf/logind.conf settings it pairs with). Docs-first sequencing call: none of this is actually shipped in the live ISO yet (which still deliberately disables suspend/hibernate/lid-switch via `/etc/systemd/logind.conf.d/do-not-suspend.conf`, and spawns `swayidle -w` with zero config), the page just no longer says so. Don't let this drift either, it needs to become true, not stay aspirational.
 
-**`development-tools.mdx` was removed entirely** (was a pure outline page under User guide). The idea it was trying to cover, what software Larch ships for development work, now lives under Software guide instead, one entry per piece of software, same pattern as niri/noctalia/kitty/zsh. No separate "dev tools" page needed once that's the model.
+There used to be a `user-guide/development-tools.mdx` (a pure outline page), removed entirely -- see "Software guide section" below for where that content actually landed, and note the filename got reused there for something unrelated to this old page.
 
-That doesn't resolve the underlying gap, it just relocates where it'll show up. `packages.x86_64` still only has `vim`/`nano`/`tmux`, nothing that backs up the homepage's or the introduction's "tuned for development work" pitch. **This is a deliberate, docs-first sequencing decision, not an oversight**, confirmed by the project owner after I flagged it: write the docs first, add the actual packages after. No specific tool names belong in this copy (an early draft named `incus` as a `virt-manager` replacement; explicitly told not to use that example verbatim, keep it generic). Once real dev tooling lands in `packages.x86_64`, Software guide needs new entries for it, and the intro's claim needs to actually be true, not just asserted. Don't let this drift, it's a live IOU, not a resolved question.
+## Software guide section
+
+`default-apps.mdx` lost its `herdr` entry: that package moved from Calamares' install-time-only default list to `larch-base`'s `packages.x86_64` (a base package now, live and installed alike), alongside a batch of other dev/power-user tooling added the same day (`btop`, `htop`, `lazygit`, `kubectl`, `uv`, `paru-bin`, `k3d-bin`).
+
+New `development-tools.mdx` documents all of that (plus `herdr`, moved here). This **resolves the long-standing IOU** tracked below in Next steps: `packages.x86_64` now backs up the homepage's and `index.mdx`'s "tuned for development work" pitch with real, present-tense packages, not an aspiration. Same lean per-tool treatment as the rest of Software guide: link + one factual sentence, no puffery.
+
+(History: a `user-guide/development-tools.mdx` outline page existed once, was removed, and the idea moved to Software guide instead, one entry per piece of software rather than a separate "dev tools" page. At that point `packages.x86_64` still only had `vim`/`nano`/`tmux` -- a deliberate docs-first sequencing call, confirmed by the project owner. The gap is closed now, see above.)
+
+## Development section
+
+`architecture.mdx` was substantially rewritten: it used to describe a speculative `profiles/` tree (shell/WM choice at install time, copied into the new user's home) that was never built, and claimed `/etc/skel` held "base configs, always applied" -- flatly wrong once `/etc/skel` was reverted to plain Arch default (see `larch-base`'s own commit history for that reversal). Now describes the actual mechanism: `larch-postinstall` copies `/home/larch`'s dotfiles onto the installer-created user directly, then layers `install-overrides/` on top for the few things that have to differ post-install.
+
+`roadmap.mdx` was substantially rewritten: it described a custom TUI installer (Go/`bubbletea`) as the plan, not yet built. That plan was abandoned in favor of a Calamares fork (`larch-calamares`), which is what actually shipped. The old TUI plan is kept in a collapsed `<details>` for history, not deleted outright, since it explains a real decision (why Calamares instead of building an installer from scratch). "Open decisions" trimmed to just the one still genuinely open (KDE theming); the shell/desktop-shell choice, launch mechanism, and login-flow items all resolved by simply not existing in what shipped (Calamares offers no such choice, launches via niri `spawn-at-startup`, SDDM autologin was decided long before this rewrite).
+
+`index.mdx`'s "Project status" table also needed the same update (installer was listed "not built yet" there too) -- this and `roadmap.mdx` should always agree on installer status, they were drifting apart before this pass.
 
 ## Fumadocs conventions (for whoever touches this next)
 
@@ -79,7 +98,7 @@ That doesn't resolve the underlying gap, it just relocates where it'll show up. 
 
 ## Writing style
 
-Every page here should pass the `unslop` skill (`/home/anish/Documents/dev/incus-k8s-manager/.claude/skills/unslop/SKILL.md`, not registered in this repo, read it directly): no AI-vocabulary, no puffery, active voice, sentence-case headings, no em dashes, callouts used for genuinely different content (warnings, TODOs) not as decoration.
+Every page here should pass the `unslop` skill (`~/.claude/skills/unslop/SKILL.md`, user-level, not registered in this repo): no AI-vocabulary, no puffery, active voice, sentence-case headings, no em dashes, callouts used for genuinely different content (warnings, TODOs) not as decoration.
 
 ## Homepage
 
@@ -94,12 +113,13 @@ Known placeholders:
 
 ## Next steps
 
+Resolved this pass: installer documented as built (`getting-started.mdx`, `installation-guide.mdx`, `roadmap.mdx`, `index.mdx`'s Project status table all agree now), real dev/power-user tooling landed in `packages.x86_64` with `development-tools.mdx` to document it, homepage screenshot question settled, `architecture.mdx` no longer describes an abandoned design.
+
+Still open:
+
 1. Fill in `noctalia.mdx` once there's a real demo video URL for it (see above, blocked on that specifically now, not general detail).
 2. Decide on a release process, then fill in `getting-started.mdx`'s Download section and swap `downloadUrl` in `src/lib/shared.ts` for the real one (used by both the homepage and `<DownloadButton />`).
 3. Revisit `known-issues.mdx`'s KDE theming section if that investigation resumes.
-4. `getting-started.mdx`'s "Installing Larch" section is updated, the installer exists now. `development/roadmap.mdx` still needs the same update, it still describes the installer as unbuilt.
-5. Homepage screenshot question resolved: both it and `larch-base.mdx` now use the same `larch-base` README hero image URL. Still open: whether a `LICENSE` file should exist.
-6. Ship the swayidle config, sleep.conf, and logind.conf settings `user-guide/power-management.mdx` now describes as fact. Live ISO still disables suspend/hibernate/lid-switch entirely and runs swayidle with zero config.
-7. **Priority.** Add real developer/power-user tooling to `packages.x86_64` to back up what `index.mdx` and the homepage now claim as present-tense fact. Then add entries for it in Software guide. This is the one open item most likely to make the docs look dishonest if it sits too long.
-8. `index.mdx`'s "Project status" now frames the whole project as three stages: finish the live ISO (current focus) → build the installer → keep docs current as an ongoing commitment, not a stage with an end date. `development/roadmap.mdx` still describes things in the older "built / not started" checklist style and doesn't reflect this three-stage framing. Worth reconciling once the roadmap page gets touched again, so the two pages tell the same story.
-9. Fill in `larch-dank-shell.mdx` and `larch-hyprland.mdx` once those variants actually exist (repo, screenshot, real package list). Once either does, `getting-started.mdx`'s single Download button needs to become a choice between variants.
+4. Whether a `LICENSE` file should exist.
+5. Ship the swayidle config, sleep.conf, and logind.conf settings `user-guide/power-management.mdx` now describes as fact. Live ISO still disables suspend/hibernate/lid-switch entirely and runs swayidle with zero config.
+6. Fill in `larch-dank-shell.mdx` and `larch-hyprland.mdx` once those variants actually exist (repo, screenshot, real package list). Once either does, `getting-started.mdx`'s single Download button needs to become a choice between variants.

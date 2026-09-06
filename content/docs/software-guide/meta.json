@@ -1,4 +1,4 @@
 {
   "title": "Software guide",
-  "pages": ["niri", "noctalia", "shell-and-terminal", "networking", "default-apps"]
+  "pages": ["niri", "noctalia", "shell-and-terminal", "networking", "default-apps", "development-tools"]
 }

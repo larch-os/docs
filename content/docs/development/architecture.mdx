@@ -7,34 +7,23 @@ description: How the Larch repo is put together
 
 ```
 archiso/releng/   archiso profile for the ISO, forked from the official releng profile
-scripts/          build-time tooling (AUR local repo)
+scripts/          build-time tooling (AUR local repo, wallpaper fetch)
 assets/           brand assets (logo, splash source)
 docs/             design notes
 ```
 
-The whole distro is a fork of archiso's official `releng` profile. Customization happens through the ISO build config, the (future) installer, and post-install provisioning, not through a custom package repo.
+The whole distro is a fork of archiso's official `releng` profile. Customization happens through the ISO build config, the installer ([`larch-calamares`](https://github.com/larch-os/larch-calamares)), and post-install provisioning, not through a custom package repo.
 
-## Config and profile structure
+## How the installed user gets Larch's config
 
-```
-airootfs/etc/skel/          base configs, always applied
-profiles/
-  shell/fish/*
-  shell/zsh/*
-  wm-shell/noctalia/*
-  wm-shell/dank/*
-```
+`/etc/skel` is plain Arch default, just whatever the `bash`/`screen` packages put there. Larch's niri/noctalia/zsh setup is scoped to the live `larch` user and the one user Calamares creates at install time, not every future `useradd`.
 
-<Callout type="warn">
-  The `profiles/` tree above is the design, not yet built. The installer is meant to read a user's choices (shell, desktop shell) and copy the matching profile into the new user's home during `arch-chroot`. Right now, only the `zsh` + `noctalia` path exists, baked directly into the live user's home rather than sourced from a `profiles/` tree. See [Roadmap](/docs/development/roadmap).
-</Callout>
+The installer-created user gets that config through `larch-calamares`'s `larch-postinstall` module: it copies `/home/larch`'s dotfiles onto the new user directly (skipping the bash files, which the user's own real skel already provided), then layers this repo's `install-overrides/` (shipped in the squashfs at `/usr/share/larch/install-overrides/`) on top for anything that has to differ once Calamares itself is gone from the installed system, for example the noctalia bar losing its install button, or niri no longer trying to auto-launch an installer that isn't there anymore.
 
-## Why the live session config doubles as the installer default
-
-The live ISO's noctalia config is meant to be the same one copied into a freshly installed system when a user picks noctalia at install time, single source of truth, no separate "installed system" config to keep in sync by hand.
+The live session's config is still the one source of truth: author it once in `/home/larch`, and both the live ISO and the installed system get it, with overrides only where they genuinely need to diverge.
 
 ## Key decisions worth knowing
 
 - **oh-my-zsh is a git submodule**, not vendored files (see [Shell and terminal](/docs/software-guide/shell-and-terminal)). Clone with `--recurse-submodules` or the build fails loudly rather than silently shipping an empty `.oh-my-zsh` directory.
-- **No `/etc/skel` for oh-my-zsh.** Deliberately scoped to the `larch` live user. The installer will wire it into the installer-created user by hand later, not through skel.
+- **Wallpapers are fetched, not committed.** `scripts/build-local-repo.sh` pulls a numbered set (`larch-0.png`, `larch-1.png`, ...) from a fixed URL at build time, probing upward until one 404s. Binary image assets don't belong in git history.
 - **Never rename a built ISO file.** If a VM needs to point at a new build, repoint the VM's disk XML at the real dated filename (`out/larch-<date>-x86_64.iso`) instead.
