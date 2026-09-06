@@ -16,13 +16,13 @@ git clone --recurse-submodules git@github.com:larch-os/larch-base.git
 ## Build
 
 ```sh
-./scripts/build-local-repo.sh          # once, and whenever AUR packages/submodules bump
-sudo mkarchiso -v -o out/ archiso/releng
+make prepare   # once, and whenever AUR packages/submodules bump
+make iso
 ```
 
-`build-local-repo.sh` checks out the submodules, copies the plugins into place, and builds the two AUR-only packages (`sddm-silent-theme`, `redhat-fonts`) into a local pacman repo at `/tmp/larch-local-repo`. Skip it and `mkarchiso` fails loudly instead of shipping a broken build.
+`make prepare` (`scripts/prepare-iso.sh`) checks out the submodules, copies the zsh plugins into place, builds the AUR-only packages (`sddm-silent-theme`, `redhat-fonts`, `herdr-bin`, `paru-bin`, `k3d-bin`) and `larch-calamares` into a local pacman repo at `/tmp/larch-local-repo`, and fetches the wallpaper set. Skip it and `mkarchiso` fails loudly instead of shipping a broken build.
 
-Output lands in `out/larch-<date>-x86_64.iso`.
+`make iso` runs `sudo mkarchiso -v -w work -o out archiso/releng`. Output lands in `out/larch-<date>-x86_64.iso`.
 
 ## The incremental-build gotcha
 
@@ -34,7 +34,7 @@ Output lands in `out/larch-<date>-x86_64.iso`.
 
 The symptom: you edit a file under `airootfs/`, rerun the same `mkarchiso` command, and get a new-looking ISO that's actually byte-for-byte the build from before your edit. The tell is a suspiciously short build log (just "Validating options... Done!") and an output file whose modification time didn't move.
 
-Deleting only the top-level marker isn't enough, the sub-steps (airootfs copy, customize script, squashfs, boot files) each have their own markers, and clearing some but not others risks an inconsistent chroot (the customize script running `useradd` a second time, for instance). **The reliable fix is `rm -rf work/` and a full clean rebuild.** Since the pacman package cache persists independently of `work/`, a clean rebuild re-extracts and reinstalls locally without re-downloading anything, so it's not much slower than the incremental path was supposed to be, and it's actually correct.
+Deleting only the top-level marker isn't enough, the sub-steps (airootfs copy, customize script, squashfs, boot files) each have their own markers, and clearing some but not others risks an inconsistent chroot (the customize script running `useradd` a second time, for instance). **The reliable fix is `make clean` (`rm -rf work/`) and a full clean rebuild.** Since the pacman package cache persists independently of `work/`, a clean rebuild re-extracts and reinstalls locally without re-downloading anything, so it's not much slower than the incremental path was supposed to be, and it's actually correct.
 
 ## Testing your build
 
