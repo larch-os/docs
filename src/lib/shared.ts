@@ -11,4 +11,4 @@ export const gitConfig = {
 
 // Dated filename, not a "latest" alias -- no such redirect exists yet at this
 // bucket. Update this each time a new build gets published, until one does.
-export const downloadUrl = 'https://storage.googleapis.com/larch-os/iso/larch-2026.09.06-x86_64.iso';
+export const downloadUrl = 'https://storage.googleapis.com/larch-os/iso/larch-2026.09.07-x86_64.iso';
