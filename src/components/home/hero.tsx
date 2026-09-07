@@ -48,18 +48,15 @@ export function Hero() {
               for
             </span>
             <span className="font-[family-name:var(--font-lazy)] text-6xl italic text-fd-foreground sm:text-8xl md:text-9xl">
-              lazy
+              developers
             </span>
           </span>
           <span className="flex flex-wrap items-baseline gap-x-3 sm:gap-x-4">
             <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
-              yet
+              and
             </span>
             <span className="font-[family-name:var(--font-display)] text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500 sm:text-7xl md:text-8xl">
-              power
-            </span>
-            <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
-              users.
+              engineers.
             </span>
           </span>
         </h1>
@@ -71,8 +68,8 @@ export function Hero() {
             to work, not setting one up.
           </p>
           <p>
-            Built on real Arch for developers and engineers who want a fast,
-            no-nonsense system that stays out of the way.
+            Built on real Arch. Nothing dumbed down, nothing standing between
+            you and whatever you need.
           </p>
         </div>
 

@@ -16,14 +16,15 @@ export function Pitch() {
         </p>
         <p className="mt-10 text-base leading-relaxed text-fd-muted-foreground">
           <span className="font-[family-name:var(--font-lazy)] italic text-fd-foreground">
-            Lazy
+            Developer
           </span>
-          , because you&apos;re not hand-rolling a window manager config from
-          scratch.{' '}
+          , because the tools you reach for every day are already there:
+          chezmoi for dotfiles, pass for secrets, lazygit, htop and btop, uv,
+          k3d and kubectl, paru for anything else on the AUR.{' '}
           <span className="font-[family-name:var(--font-display)] font-semibold text-fd-foreground">
-            Power user
+            Engineer
           </span>
-          , because underneath it&apos;s real Arch: nothing dumbed down,
+          , because underneath it&apos;s real Arch. Nothing dumbed down,
           nothing standing between you and whatever you need.
         </p>
       </div>
