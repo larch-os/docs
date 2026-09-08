@@ -13,6 +13,7 @@ const config = {
       // image optimizer follows to actually fetch the bytes.
       { protocol: 'https', hostname: 'github.com', pathname: '/user-attachments/assets/**' },
       { protocol: 'https', hostname: '*.s3.amazonaws.com' },
+      { protocol: 'https', hostname: 'storage.googleapis.com', pathname: '/larch-os/**' },
     ],
   },
 };

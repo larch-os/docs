@@ -6,12 +6,12 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-fd-border font-[family-name:var(--font-swiss)]">
       <Image
-        src="https://github.com/user-attachments/assets/3327db16-d57b-425b-ae0a-1ae75e4e80c3"
+        src="https://storage.googleapis.com/larch-os/assets/wallpapers/larch-1.png"
         alt=""
         aria-hidden
         fill
         priority
-        className="object-cover opacity-25"
+        className="object-cover opacity-45"
       />
       <div className="absolute inset-0 bg-fd-background/80" />
 
@@ -84,10 +84,6 @@ export function Hero() {
           </Link>
         </div>
       </div>
-
-      <p className="absolute right-6 bottom-6 font-[family-name:var(--font-technical)] text-xs text-fd-muted-foreground">
-        niri + noctalia, shipping now
-      </p>
     </section>
   );
 }
