@@ -12,7 +12,7 @@ export function Hero() {
       </div>
 
       <div className="lg:grid lg:grid-cols-12">
-        <div className="flex flex-col justify-center gap-8 px-6 py-14 lg:col-span-5 lg:self-center lg:py-24 lg:pr-10 lg:pl-[max(1.5rem,calc((100vw-64rem)/2))]">
+        <div className="flex flex-col justify-center gap-8 px-6 py-14 lg:col-span-5 lg:self-start lg:pt-10 lg:pr-10 lg:pb-24 lg:pl-[max(1.5rem,calc((100vw-64rem)/2))]">
           <h1 className="flex flex-col gap-1">
             <span className="flex flex-wrap items-baseline gap-x-3">
               <span className="text-lg font-light text-fd-muted-foreground/70 sm:text-xl">
