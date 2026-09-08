@@ -1,91 +1,79 @@
-import Image from "next/image";
-import Link from "next/link";
-import { downloadUrl } from "@/lib/shared";
+import Image from 'next/image';
+import Link from 'next/link';
+import { downloadUrl } from '@/lib/shared';
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-fd-border">
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-40 dark:opacity-60"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 15% 0%, rgba(56,189,248,0.2), transparent 70%)",
-        }}
-      />
-      <Image
-        src="/images/logo.png"
-        alt=""
-        width={900}
-        height={900}
-        aria-hidden
-        className="pointer-events-none absolute -right-40 top-1/2 -z-10 hidden size-[24rem] -translate-y-1/2 opacity-[0.04] sm:block lg:size-[30rem]"
-      />
+    <section className="relative overflow-x-clip border-b border-fd-border font-[family-name:var(--font-swiss)]">
+      <div className="mx-auto max-w-5xl px-6 pt-8">
+        <span className="font-[family-name:var(--font-technical)] text-xs tracking-[0.2em] text-fd-muted-foreground uppercase">
+          Larch · Distro
+        </span>
+      </div>
 
-      <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-20 sm:py-28">
-        <div className="flex items-center gap-2">
-          <Image
-            src="/images/logo.png"
-            alt=""
-            width={200}
-            height={200}
-            className="size-8 sm:size-9"
-            priority
-          />
-          <span className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight sm:text-2xl">
-            <span className="text-fd-foreground">lar</span>
-            <span className="bg-gradient-to-b from-sky-400 to-blue-600 bg-clip-text text-transparent">
-              ch
+      <div className="lg:grid lg:grid-cols-12">
+        <div className="flex flex-col justify-center gap-8 px-6 py-14 lg:col-span-5 lg:self-center lg:py-24 lg:pr-10 lg:pl-[max(1.5rem,calc((100vw-64rem)/2))]">
+          <h1 className="flex flex-col gap-1">
+            <span className="flex flex-wrap items-baseline gap-x-3">
+              <span className="text-lg font-light text-fd-muted-foreground/70 sm:text-xl">
+                for
+              </span>
+              <span className="text-4xl font-bold tracking-tight text-fd-foreground sm:text-5xl">
+                developers
+              </span>
             </span>
-          </span>
+            <span className="flex flex-wrap items-baseline gap-x-3">
+              <span className="text-lg font-light text-fd-muted-foreground/70 sm:text-xl">
+                and
+              </span>
+              <span className="text-3xl font-bold tracking-tight text-blue-400 sm:text-4xl">
+                engineers.
+              </span>
+            </span>
+          </h1>
+
+          <div className="flex max-w-md flex-col gap-4 text-base leading-relaxed text-fd-muted-foreground">
+            <p>
+              Boots into a desktop that&apos;s already set up to move fast:
+              dark theme, everything a keystroke away, so you&apos;re getting
+              to work, not setting one up.
+            </p>
+            <p>
+              Built on real Arch. Nothing dumbed down, nothing standing
+              between you and whatever you need.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={downloadUrl}
+              className="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blue-500"
+            >
+              Download ISO
+            </Link>
+            <Link
+              href="/docs"
+              className="rounded-lg border border-fd-border px-5 py-2.5 font-medium text-fd-foreground transition-colors hover:bg-fd-accent"
+            >
+              Read the docs
+            </Link>
+          </div>
         </div>
 
-        <h1 className="flex flex-col gap-2">
-          <span className="text-sm font-medium tracking-[0.2em] text-fd-muted-foreground/70 uppercase sm:text-base">
-            Distro
-          </span>
-          <span className="flex flex-wrap items-baseline gap-x-3 sm:gap-x-4">
-            <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
-              for
-            </span>
-            <span className="font-[family-name:var(--font-lazy)] text-6xl italic text-fd-foreground sm:text-8xl md:text-9xl">
-              developers
-            </span>
-          </span>
-          <span className="flex flex-wrap items-baseline gap-x-3 sm:gap-x-4">
-            <span className="font-light text-lg text-fd-muted-foreground/70 sm:text-2xl md:text-3xl">
-              and
-            </span>
-            <span className="font-[family-name:var(--font-display)] text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500 sm:text-7xl md:text-8xl">
-              engineers.
-            </span>
-          </span>
-        </h1>
-
-        <div className="flex max-w-lg flex-col gap-2 text-base leading-relaxed text-fd-muted-foreground">
-          <p>
-            Boots into a desktop that&apos;s already set up to move fast:
-            dark theme, everything a keystroke away, so you&apos;re getting
-            to work, not setting one up.
+        <div className="px-6 pb-14 lg:col-span-7 lg:self-start lg:px-0 lg:pt-10 lg:pr-0 lg:pb-14">
+          <div className="overflow-hidden rounded-xl border border-fd-border shadow-[0_2px_8px_rgba(0,0,0,0.08)] lg:rounded-r-none">
+            <Image
+              src="https://github.com/user-attachments/assets/3327db16-d57b-425b-ae0a-1ae75e4e80c3"
+              alt="The Larch live desktop: niri with the noctalia panel running along the top"
+              width={1920}
+              height={1080}
+              className="w-full"
+              priority
+            />
+          </div>
+          <p className="mt-3 font-[family-name:var(--font-technical)] text-xs text-fd-muted-foreground">
+            niri + noctalia, shipping now
           </p>
-          <p>
-            Built on real Arch. Nothing dumbed down, nothing standing between
-            you and whatever you need.
-          </p>
-        </div>
-
-        <div className="mt-2 flex flex-wrap items-center gap-3">
-          <Link
-            href={downloadUrl}
-            className="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blue-500"
-          >
-            Download ISO
-          </Link>
-          <Link
-            href="/docs"
-            className="rounded-lg border border-fd-border px-5 py-2.5 font-medium text-fd-foreground transition-colors hover:bg-fd-accent"
-          >
-            Read the docs
-          </Link>
         </div>
       </div>
     </section>

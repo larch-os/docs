@@ -10,6 +10,9 @@ export function Footer() {
           <Link href="/docs" className="hover:text-fd-foreground">
             Docs
           </Link>
+          <Link href="/blog" className="hover:text-fd-foreground">
+            Blog
+          </Link>
           <Link
             href={`https://github.com/${gitConfig.user}/${gitConfig.repo}`}
             className="hover:text-fd-foreground"
