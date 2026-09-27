@@ -19,7 +19,7 @@ const tags = {
     "k3d",
     "kubectl",
   ],
-  defaults: ["chezmoi", "pass"],
+  defaults: ["chezmoi", "pass", "zsh", "herdr", "neovim"],
 };
 
 const points = [
@@ -27,15 +27,15 @@ const points = [
     n: "01",
     icon: Users,
     title: "Purpose-built for developers",
-    body: "Larch is built for developers and engineers: people who want speed and full control. Nothing dumbed down, no walled garden.",
+    body: "Who want a system with all necessary tooling and setup.",
     graphic: TerminalGraphic,
     extra: undefined,
   },
   {
     n: "02",
     icon: Boxes,
-    title: "Comes with the tools you use",
-    body: "Docker is on by default. Add Incus for full VMs, or Chromium for a second browser. Pick a language toolchain too. k3d and kubectl are already there for local Kubernetes.",
+    title: "Comes preinstalled with the tools you use.",
+    body: "Docker by default. Enable Incus for VMs support. Preintegrated programming language toolchain. k3d and kubectl are already there for local Kubernetes. and many more.",
     graphic: ToolingGraphic,
     extra: (
       <>
@@ -44,7 +44,7 @@ const points = [
           href="/docs/user-guide/installation-guide"
           className="text-sm font-medium text-blue-400 underline underline-offset-4 hover:text-blue-300"
         >
-          Full install-time checklist in the docs →
+          See Full install-time checklist in the docs →
         </Link>
       </>
     ),
@@ -52,16 +52,16 @@ const points = [
   {
     n: "03",
     icon: SlidersHorizontal,
-    title: "Defaults picked for a reason",
-    body: "Every default comes from real trial and error. Kept because it works, not because it shipped first.",
+    title: "Defaults picked by developers, for developers",
+    body: "Every tool and software comes from real trial and error. Kept because it works, not because it shipped first. For example",
     graphic: DefaultsGraphic,
     extra: <TagRow tags={tags.defaults} />,
   },
   {
     n: "04",
     icon: Zap,
-    title: "No setup weekend",
-    body: "Keybindings, layout, dark theme: all ready before you boot it. You start working, not building a system.",
+    title: "No post install setup required",
+    body: "Keybindings, layout, dark theme: all ready before you boot it. You start working, not setting up a system.",
     graphic: SpeedGraphic,
     extra: undefined,
   },
