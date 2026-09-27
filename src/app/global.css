@@ -29,3 +29,16 @@ html > body[data-scroll-locked] {
 .animate-fade-in-up {
   animation: fade-in-up 600ms ease-out both;
 }
+
+/* Hide the nav bar over the home hero until the user scrolls past it. */
+#nd-nav {
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+body:has(#home-hero):not(.nav-visible) #nd-nav {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
