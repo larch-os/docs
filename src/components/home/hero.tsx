@@ -97,12 +97,25 @@ export function Hero() {
 
       <div className="relative z-10 flex flex-1 items-center justify-center w-full px-6">
         <div className="w-full max-w-5xl flex flex-col justify-center gap-8 py-12 sm:py-16">
-          <span
-            className="animate-fade-in-up font-(family-name:--font-technical) text-xs tracking-[0.2em] text-fd-muted-foreground uppercase"
+          <div
+            className="animate-fade-in-up flex items-center gap-2.5"
             style={{ animationDelay: "0ms" }}
           >
-            Larch · Distro
-          </span>
+            <Image
+              src="/images/logo.png"
+              alt=""
+              aria-hidden
+              width={26}
+              height={26}
+              className="size-6.5"
+            />
+            <span className="font-(family-name:--font-display) text-xl font-semibold tracking-tight text-fd-foreground">
+              Larch
+            </span>
+            <span className="font-(family-name:--font-technical) text-xs tracking-[0.2em] text-fd-muted-foreground uppercase">
+              Distro
+            </span>
+          </div>
 
           <h1
             className="animate-fade-in-up max-w-3xl leading-tight"

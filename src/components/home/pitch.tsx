@@ -1,32 +1,41 @@
-import Link from 'next/link';
-import { Boxes, SlidersHorizontal, Users, Zap } from 'lucide-react';
-import { Reveal } from './reveal';
+import Link from "next/link";
+import { Boxes, SlidersHorizontal, Users, Zap } from "lucide-react";
+import { Reveal } from "./reveal";
 import {
   DefaultsGraphic,
   SpeedGraphic,
   TerminalGraphic,
   ToolingGraphic,
-} from './pitch-graphics';
+} from "./pitch-graphics";
 
 const tags = {
-  tooling: ['docker', 'incus', 'chromium', 'node', 'go', 'bun', 'k3d', 'kubectl'],
-  defaults: ['chezmoi', 'pass'],
+  tooling: [
+    "docker",
+    "incus",
+    "chromium",
+    "node",
+    "go",
+    "bun",
+    "k3d",
+    "kubectl",
+  ],
+  defaults: ["chezmoi", "pass"],
 };
 
 const points = [
   {
-    n: '01',
+    n: "01",
     icon: Users,
-    title: 'Not for everyone',
-    body: 'Larch is built for developers and engineers: people who want speed and full control. Nothing dumbed down, no walled garden.',
+    title: "Purpose-built for developers",
+    body: "Larch is built for developers and engineers: people who want speed and full control. Nothing dumbed down, no walled garden.",
     graphic: TerminalGraphic,
     extra: undefined,
   },
   {
-    n: '02',
+    n: "02",
     icon: Boxes,
-    title: 'Comes with the tools you use',
-    body: 'Docker is on by default. Add Incus for full VMs, or Chromium for a second browser. Pick a language toolchain too. k3d and kubectl are already there for local Kubernetes.',
+    title: "Comes with the tools you use",
+    body: "Docker is on by default. Add Incus for full VMs, or Chromium for a second browser. Pick a language toolchain too. k3d and kubectl are already there for local Kubernetes.",
     graphic: ToolingGraphic,
     extra: (
       <>
@@ -41,17 +50,17 @@ const points = [
     ),
   },
   {
-    n: '03',
+    n: "03",
     icon: SlidersHorizontal,
-    title: 'Defaults picked for a reason',
-    body: 'Every default comes from real trial and error. Kept because it works, not because it shipped first.',
+    title: "Defaults picked for a reason",
+    body: "Every default comes from real trial and error. Kept because it works, not because it shipped first.",
     graphic: DefaultsGraphic,
     extra: <TagRow tags={tags.defaults} />,
   },
   {
-    n: '04',
+    n: "04",
     icon: Zap,
-    title: 'No setup weekend',
+    title: "No setup weekend",
     body: "Keybindings, layout, dark theme: all ready before you boot it. You start working, not building a system.",
     graphic: SpeedGraphic,
     extra: undefined,
@@ -83,7 +92,7 @@ function PitchSection({
       <span
         aria-hidden
         className={`pointer-events-none absolute top-1/2 -translate-y-1/2 select-none font-(family-name:--font-display) text-[28vw] leading-none font-bold text-fd-foreground/3 sm:text-[22vw] ${
-          reversed ? 'right-0' : 'left-0'
+          reversed ? "right-0" : "left-0"
         }`}
       >
         {point.n}
@@ -91,11 +100,11 @@ function PitchSection({
 
       <div
         className={`relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-10 md:flex-row md:gap-10 lg:gap-16 ${
-          reversed ? 'md:flex-row-reverse' : ''
+          reversed ? "md:flex-row-reverse" : ""
         }`}
       >
         <div className="flex w-full flex-1 flex-col gap-5 text-center md:text-left">
-          <Reveal direction={reversed ? 'right' : 'left'}>
+          <Reveal direction={reversed ? "right" : "left"}>
             <div
               className={`flex items-center gap-3 justify-center md:justify-start`}
             >
@@ -108,20 +117,20 @@ function PitchSection({
             </div>
           </Reveal>
 
-          <Reveal direction={reversed ? 'right' : 'left'} delay={80}>
+          <Reveal direction={reversed ? "right" : "left"} delay={80}>
             <h2 className="text-3xl font-extrabold tracking-tight text-fd-foreground sm:text-4xl lg:text-5xl">
               {point.title}
             </h2>
           </Reveal>
 
-          <Reveal direction={reversed ? 'right' : 'left'} delay={160}>
+          <Reveal direction={reversed ? "right" : "left"} delay={160}>
             <p className="mx-auto max-w-lg text-base leading-relaxed text-fd-muted-foreground sm:text-lg md:mx-0">
               {point.body}
             </p>
           </Reveal>
 
           {point.extra && (
-            <Reveal direction={reversed ? 'right' : 'left'} delay={240}>
+            <Reveal direction={reversed ? "right" : "left"} delay={240}>
               <div className="flex flex-col items-center gap-4 md:items-start">
                 {point.extra}
               </div>
@@ -130,7 +139,7 @@ function PitchSection({
         </div>
 
         <Reveal
-          direction={reversed ? 'left' : 'right'}
+          direction={reversed ? "left" : "right"}
           duration={600}
           className="flex w-full flex-1 items-center justify-center"
         >
