@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { downloadUrl } from "@/lib/shared";
-import { NavReveal } from "@/components/home/nav-reveal";
 
 const facts = [
   "Arch-based",
@@ -14,9 +13,8 @@ export function Hero() {
   return (
     <section
       id="home-hero"
-      className="relative -mt-14 overflow-hidden border-b border-fd-border font-(family-name:--font-swiss) w-full h-screen flex flex-col"
+      className="relative overflow-hidden border-b border-fd-border font-(family-name:--font-swiss) w-full h-[calc(100dvh-3.5rem)] flex flex-col"
     >
-      <NavReveal />
       <Image
         src="https://storage.googleapis.com/larch-os/assets/wallpapers/larch-1.png"
         alt=""

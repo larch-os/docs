@@ -5,6 +5,11 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  // Lets the dev server be opened from another device on the LAN (e.g. a
+  // phone) for mobile testing. Next.js otherwise 403s the JS chunk requests
+  // from any origin but localhost. Update this IP if your machine's LAN
+  // address changes.
+  allowedDevOrigins: ['192.168.29.46'],
   images: {
     remotePatterns: [
       // GitHub's user-attachments links (README/issue image uploads) 302 to a

@@ -2,13 +2,25 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+type Direction = 'up' | 'left' | 'right';
+
+const HIDDEN_TRANSFORM: Record<Direction, string> = {
+  up: 'translate-y-6 opacity-0',
+  left: '-translate-x-12 opacity-0',
+  right: 'translate-x-12 opacity-0',
+};
+
 export function Reveal({
   children,
   delay = 0,
+  duration = 420,
+  direction = 'up',
   className,
 }: {
   children: React.ReactNode;
   delay?: number;
+  duration?: number;
+  direction?: Direction;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -46,9 +58,9 @@ export function Reveal({
     <div
       ref={ref}
       className={`${
-        animated ? 'transition-[opacity,transform] duration-[420ms] ease-out' : ''
-      } ${visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} ${className ?? ''}`}
-      style={animated ? { transitionDelay: `${delay}ms` } : undefined}
+        animated ? 'transition-[opacity,transform] ease-out' : ''
+      } ${visible ? 'translate-x-0 translate-y-0 opacity-100' : HIDDEN_TRANSFORM[direction]} ${className ?? ''}`}
+      style={animated ? { transitionDelay: `${delay}ms`, transitionDuration: `${duration}ms` } : undefined}
     >
       {children}
     </div>
